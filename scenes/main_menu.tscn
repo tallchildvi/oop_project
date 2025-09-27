@@ -1,0 +1,208 @@
+[gd_scene load_steps=8 format=3 uid="uid://d0l7c1su2o5xm"]
+
+[ext_resource type="Script" uid="uid://dvk257t4xhsir" path="res://scenes/MainMenu.cs" id="1_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://b8bxp4tpr3ibv" path="res://source/main_menu_background.png" id="1_ekxnf"]
+[ext_resource type="Script" uid="uid://bg4djitww62vg" path="res://scenes/PopupPanel.cs" id="3_bqqt6"]
+
+[sub_resource type="SystemFont" id="SystemFont_wu84c"]
+font_names = PackedStringArray("Impact")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
+bg_color = Color(0.60784316, 0.54509807, 0.4392157, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.37254903, 0.27450982, 0.18431373, 1)
+border_blend = true
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+corner_detail = 5
+
+[sub_resource type="Theme" id="Theme_bqqt6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
+bg_color = Color(0.9, 0.9, 0.9, 1)
+
+[node name="Main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bqqt6")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.33333334
+anchor_top = -0.33333334
+anchor_right = 1.3333334
+anchor_bottom = 1.3333334
+offset_left = 384.0
+offset_top = 216.0
+offset_right = -384.0
+offset_bottom = -216.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_ekxnf")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="seperater" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = 3
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = SubResource("SystemFont_wu84c")
+theme_override_font_sizes/font_size = 64
+text = "GAME NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="seperater2" type="Control" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+alignment = 1
+
+[node name="play_button" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="seperater3" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 120)
+layout_mode = 2
+
+[node name="settings_button" type="TextureButton" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+stretch_mode = 4
+
+[node name="PopupPanel" type="PopupPanel" parent="."]
+oversampling_override = 1.0
+mode = 1
+size = Vector2i(500, 307)
+visible = true
+theme_override_styles/panel = SubResource("StyleBoxFlat_bqqt6")
+script = ExtResource("3_bqqt6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PopupPanel"]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 495.0
+offset_bottom = 302.0
+
+[node name="Control" type="Control" parent="PopupPanel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 15)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PopupPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 42
+text = "Settings"
+
+[node name="Control4" type="Control" parent="PopupPanel/VBoxContainer"]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+
+[node name="music_box" type="HBoxContainer" parent="PopupPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Control" type="Control" parent="PopupPanel/VBoxContainer/music_box"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="PopupPanel/VBoxContainer/music_box"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Music volume
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+justification_flags = 161
+
+[node name="Control3" type="Control" parent="PopupPanel/VBoxContainer/music_box"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+
+[node name="HSlider" type="HSlider" parent="PopupPanel/VBoxContainer/music_box"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme = SubResource("Theme_bqqt6")
+theme_override_constants/center_grabber = 0
+theme_override_constants/grabber_offset = -12
+theme_override_constants/tick_offset = 0
+theme_override_styles/slider = SubResource("StyleBoxFlat_wu84c")
+page = 1.0
+ticks_position = 3
+
+[node name="Control2" type="Control" parent="PopupPanel/VBoxContainer/music_box"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="language_box" type="HBoxContainer" parent="PopupPanel/VBoxContainer"]
+layout_mode = 2
+
+[node name="Control3" type="Control" parent="PopupPanel/VBoxContainer/language_box"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="PopupPanel/VBoxContainer/language_box"]
+layout_mode = 2
+text = "Language"
+
+[node name="OptionButton" type="OptionButton" parent="PopupPanel/VBoxContainer/language_box"]
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 4
+item_count = 2
+popup/item_0/text = "Українська"
+popup/item_0/id = 0
+popup/item_1/text = "English"
+popup/item_1/id = 1
+
+[node name="Control2" type="Control" parent="PopupPanel/VBoxContainer/language_box"]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+
+[node name="Control3" type="Control" parent="PopupPanel/VBoxContainer"]
+custom_minimum_size = Vector2(80, 30)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="PopupPanel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 18
+text = "Exit
+"
+flat = true
