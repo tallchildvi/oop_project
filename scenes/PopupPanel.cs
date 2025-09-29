@@ -22,10 +22,14 @@ public partial class PopupPanel : Godot.PopupPanel{
 		var lineStyle = new StyleBoxFlat { BgColor = new Color(0.3f, 0.3f, 0.3f)};
 		var fillStyle = new StyleBoxFlat { BgColor = new Color(0.2f, 0.8f, 0.2f)};
 		var grabberStyle = new StyleBoxFlat { BgColor = new Color(1, 1, 1)};
+		
+		lineStyle.ContentMarginTop = 6;
+		lineStyle.ContentMarginBottom = 6;
 
 		_musicSlider.AddThemeStyleboxOverride("slider", lineStyle);
 		_musicSlider.AddThemeStyleboxOverride("slider_fill", fillStyle);
 		_musicSlider.AddThemeStyleboxOverride("grabber", grabberStyle);
+		_musicSlider.AddThemeConstantOverride("grabber_offset", 0);
 
 		// Початкове значення
 		_musicSlider.Value = 100;
