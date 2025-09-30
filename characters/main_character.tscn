@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://3rybxl43n2or"]
+
+[ext_resource type="Script" uid="uid://bvwlih7t4l7j2" path="res://characters/MainCharacter.cs" id="1_7je4q"]
+[ext_resource type="Texture2D" uid="uid://iftylqwtsqps" path="res://characters/textures/character.jpg" id="1_yh2br"]
+[ext_resource type="Texture2D" uid="uid://dsyabiaj0kv43" path="res://characters/textures/weapon.jpg" id="3_npico"]
+
+[node name="main_character" type="Sprite2D"]
+script = ExtResource("1_7je4q")
+
+[node name="Character" type="Sprite2D" parent="."]
+position = Vector2(108.00001, 112.000046)
+scale = Vector2(0.14402407, 0.1828322)
+texture = ExtResource("1_yh2br")
+
+[node name="weapon" type="Sprite2D" parent="."]
+position = Vector2(103.8125, 215.125)
+scale = Vector2(0.122420475, 0.11191859)
+texture = ExtResource("3_npico")
