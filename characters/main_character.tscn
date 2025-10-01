@@ -16,3 +16,6 @@ texture = ExtResource("1_yh2br")
 position = Vector2(103.8125, 215.125)
 scale = Vector2(0.122420475, 0.11191859)
 texture = ExtResource("3_npico")
+
+[node name="bullet_spawn" type="Marker2D" parent="weapon"]
+position = Vector2(622.3428, 88.23378)
