@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class PopupPanel : Godot.PopupPanel{
+public partial class SettingsMenu : BaseMenu{
 	private HSlider _musicSlider;
 	private HSlider _sfxSlider;
 	private OptionButton _languageSelector;
@@ -9,7 +9,9 @@ public partial class PopupPanel : Godot.PopupPanel{
 
    public override void _Ready()
 	{
-		// Підтягування вузлів
+		
+		MenuName = "SettingsMenu";
+		base._Ready();
 		_musicSlider = GetNode<HSlider>("VBoxContainer/music_box/HSlider");
 		_languageSelector = GetNode<OptionButton>("VBoxContainer/language_box/OptionButton");
 		_backBtn = GetNode<Button>("VBoxContainer/Button");
@@ -38,11 +40,7 @@ public partial class PopupPanel : Godot.PopupPanel{
 		// Сигнали
 		_musicSlider.ValueChanged += OnMusicVolumeChanged;
 		_languageSelector.ItemSelected += OnLanguageSelected;
-		_backBtn.Pressed += () =>
-		{
-			GD.Print("Back pressed → hiding popup");
-			Hide();
-		};
+		_backBtn.Pressed += () => EventManager.TriggerEvent("CLOSE_MENU", "SettingsMenu");
 	}
 
 	private void OnMusicVolumeChanged(double value)
