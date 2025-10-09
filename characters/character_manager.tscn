@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7n251apj7li3"]
+
+[ext_resource type="Script" uid="uid://ccsrfkut2kl0q" path="res://characters/CharacterManager.cs" id="1_7e2fn"]
+
+[node name="CharacterManager" type="Node2D"]
+script = ExtResource("1_7e2fn")

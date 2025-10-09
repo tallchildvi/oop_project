@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdjcj2m00km2g"]
+
+[ext_resource type="PackedScene" uid="uid://cfhg86e8plcwb" path="res://items/reload_box.tscn" id="1_6iamk"]
+[ext_resource type="PackedScene" uid="uid://b7n251apj7li3" path="res://characters/character_manager.tscn" id="2_nsrm0"]
+[ext_resource type="Texture2D" uid="uid://b8bxp4tpr3ibv" path="res://source/main_menu_background.png" id="3_nsrm0"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="reload_box" parent="." instance=ExtResource("1_6iamk")]
+position = Vector2(615, 316)
+
+[node name="CharacterManager" parent="." instance=ExtResource("2_nsrm0")]
+
+[node name="reload_box2" parent="." instance=ExtResource("1_6iamk")]
+position = Vector2(324, 471)
+
+[node name="reload_box3" parent="." instance=ExtResource("1_6iamk")]
+position = Vector2(837, 424)
+
+[node name="reload_box4" parent="." instance=ExtResource("1_6iamk")]
+position = Vector2(660, 573)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(568, 114)
+texture = ExtResource("3_nsrm0")

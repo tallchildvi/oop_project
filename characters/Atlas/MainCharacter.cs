@@ -1,37 +1,41 @@
 using Godot;
 using System;
 
-public partial class MainCharacter : Sprite2D
+
+public partial class MainCharacter : Area2D
 {
-	private float speed = 200f;
+	private float speed;
 	private Vector2 movement = Vector2.Zero;
-	private Sprite2D weapon;
-	private Sprite2D characterSprite;
 	private Vector2 originalWeaponScale;
 	private Vector2 originalCharacterScale;
 	private Vector2 dashDirection;
+	private AnimatedSprite2D weapon;
+	private AnimatedSprite2D characterSprite;
 	private bool facingRight = true;
 	private bool in_dash = false;
-	private float dashSpeed = 600f;
-	private float dashTime = 0.3f;
+	private float dashSpeed;
+	private float dashTime;
 	private float dashTimer = 0f;
-	private float dashReloadTime = 4f;
+	private float dashReloadTime;
 	private float dashReloadTimer = 0f;
-	private float bulletReloadTime = 0.5f;
+	private float bulletReloadTime;
 	private float bulletReloadTimer = 0f;
 	private PackedScene bulletBase;
+	CharacterManager manager;
 
 	
 	public override void _Ready()
 	{
-		weapon = GetNode<Sprite2D>("weapon");
-		characterSprite = GetNode<Sprite2D>("Character");
-		bulletBase = ResourceLoader.Load<PackedScene>("res://characters/standart_bullet.tscn");
+		weapon = GetNode<AnimatedSprite2D>("Weapon2D");
+		characterSprite = GetNode<AnimatedSprite2D>("Character2D");
+		manager = GetParent() as CharacterManager;
+		bulletBase = ResourceLoader.Load<PackedScene>("res://characters/Atlas/standart_bullet.tscn");
 		originalWeaponScale = weapon.Scale;
 		originalCharacterScale = characterSprite.Scale;
 		characterSprite.FlipH = false;
 		weapon.Scale = new Vector2(Mathf.Abs(originalWeaponScale.X), originalWeaponScale.Y);
 		facingRight = true;
+		characterSprite.Play("idle");
 	}
 	
 	private void StartDash(Vector2 direction)
@@ -39,6 +43,14 @@ public partial class MainCharacter : Sprite2D
 		in_dash = true;
 		dashDirection = direction.Normalized();
 		dashTimer = dashTime;
+	}
+	
+	public void init(float set_s, float set_ds, float set_dt,float set_dr, float set_rt){
+		speed = set_s;
+		dashSpeed = set_ds;
+		dashTime = set_dt;
+		dashReloadTime = set_dr;
+		bulletReloadTime = set_rt; 
 	}
 	
 	public override void _Process(double delta)
@@ -54,9 +66,15 @@ public partial class MainCharacter : Sprite2D
 			if (Input.IsKeyPressed(Key.D))
 				movement.X += 1;
 			if (Input.IsKeyPressed(Key.Shift) && dashReloadTimer <= 0f && movement != Vector2.Zero)
-			 Dash();
+				Dash();
 			if (Input.IsKeyPressed(Key.Space)) {
-				if(bulletReloadTimer <= 0) Shoot();
+				if(bulletReloadTimer <= 0 && manager.bullet_manage()) Shoot();
+			}
+			if (Input.IsKeyPressed(Key.E)){
+				manager.TakeDamage(1);
+			}
+			if (Input.IsKeyPressed(Key.R)){
+				manager.Reload(1);
 			}
 		}
 		if (in_dash)
@@ -90,13 +108,15 @@ public partial class MainCharacter : Sprite2D
 				characterSprite.FlipH = false;
 				weapon.Scale = new Vector2(Mathf.Abs(originalWeaponScale.X), originalWeaponScale.Y);
 			}
-			
+			characterSprite.Play("run");
 		}
 		if(bulletReloadTimer >= 0f) bulletReloadTimer -= (float)delta;
+		if(movement == Vector2.Zero && !in_dash) characterSprite.Play("idle");
 	}
 	
 	public void Dash(){
 		in_dash = true;
+		characterSprite.Play("dash");
 		dashDirection = movement.Normalized();
 		dashTimer = dashTime;
 	}
@@ -110,7 +130,7 @@ public partial class MainCharacter : Sprite2D
 		}
 
 		var bullet = (StandartBullet)bulletBase.Instantiate();
-		var spawnMarker = GetNode<Marker2D>("weapon/bullet_spawn");
+		var spawnMarker = GetNode<Marker2D>("Weapon2D/bullet_spawn");
 		Vector2 spawnPos = spawnMarker.GlobalPosition;
 
 		Node parent;

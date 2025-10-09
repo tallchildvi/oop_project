@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb72mrn0fip5n"
-path="res://.godot/imported/bang.jpg-a94484ed503cdd11e6fbf9c9e97365ca.ctex"
+uid="uid://iftylqwtsqps"
+path="res://.godot/imported/character.jpg-f3d5bcd4ea6a309c3f42822ea89f7376.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/textures/bang.jpg"
-dest_files=["res://.godot/imported/bang.jpg-a94484ed503cdd11e6fbf9c9e97365ca.ctex"]
+source_file="res://characters/Atlas/textures/character.jpg"
+dest_files=["res://.godot/imported/character.jpg-f3d5bcd4ea6a309c3f42822ea89f7376.ctex"]
 
 [params]
 
