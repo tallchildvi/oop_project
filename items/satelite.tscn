@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtor8ft7cgvy"]
+
+[ext_resource type="Script" uid="uid://cmfovhnllvla5" path="res://items/Satelite.cs" id="1_jbkfu"]
+[ext_resource type="Texture2D" uid="uid://ds38lkhoe4ueq" path="res://items/textures/photo_2025-10-10_01-06-48-removebg-preview.png" id="2_45dix"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5ah5u"]
+radius = 43.0
+
+[node name="satelite" type="Area2D"]
+script = ExtResource("1_jbkfu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-9, -7)
+shape = SubResource("CircleShape2D_5ah5u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-3.9999998, -15)
+scale = Vector2(0.1749147, 0.1932251)
+texture = ExtResource("2_45dix")

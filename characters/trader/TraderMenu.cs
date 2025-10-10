@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 public partial class TraderMenu : Node2D
 {
+	[Export] public CharacterManager manager;
 	private Button close_btn;
 	private Button spin_btn;
 	private Sprite2D spinerSprite;
@@ -79,11 +80,9 @@ public partial class TraderMenu : Node2D
 		}
 
 		spinerSprite.RotationDegrees = targetAngle % 360f;
-		int item = (int)spinerSprite.RotationDegrees / 90;
-		if (GetParent() is CharacterManager manager)
-		{
-			if (item == 0) manager.luck(item);
-		}
-		GD.Print(item);
+
+		int item = Mathf.FloorToInt(spinerSprite.RotationDegrees / 90f) % 4;
+
+		manager.luck(item);
 	}
 }

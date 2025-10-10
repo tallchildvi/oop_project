@@ -5,6 +5,7 @@ public partial class StandartBullet : Sprite2D
 {
 	private Vector2 movement;
 	private float speed = 400f;
+	private float spinSpeed = 720f;
 	
 	public void Init(Vector2 direction, bool facingRight)
 	{
@@ -18,7 +19,6 @@ public partial class StandartBullet : Sprite2D
 	public override void _Process(double delta)
 	{
 		Position += movement * speed * (float)delta;
-		float angle = Mathf.Atan2(movement.Y, movement.X);
-		RotationDegrees = Mathf.RadToDeg(angle);
+		RotationDegrees += spinSpeed * (float)delta;
 	}
 }

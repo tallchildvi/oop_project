@@ -29,9 +29,13 @@ public partial class CharacterManager : Node2D
 		}
 		if (Input.IsKeyPressed(Key.M) && allow_shop && !shop_exists){
 			PackedScene shopBase = ResourceLoader.Load<PackedScene>("res://characters/trader/trader_menu.tscn");
-			Node instance = shopBase.Instantiate();
-			AddChild(instance);
-			shop_exists = true;
+			TraderMenu menu = shopBase.Instantiate() as TraderMenu;
+			if (menu != null)
+			{
+				menu.manager = this;
+				AddChild(menu);
+				shop_exists = true;
+	  		}
 		}
 	}
 		
@@ -94,7 +98,17 @@ public partial class CharacterManager : Node2D
 		Reload(10);
 		break;
 	  case 3:
-		Reload(15);
+		GD.Print("Scooter added:");
+		if (character == null || !IsInstanceValid(character))
+		{
+		  GD.PrintErr("No valid character to attach scooter to!");
+		  return;
+		}
+		var scooterBase = (PackedScene)ResourceLoader.Load("res://items/scooter.tscn");
+		Scooter scooter = (Scooter)scooterBase.Instantiate();
+		scooter.manager = this;
+		character.AddChild(scooter);
+		GD.Print("Scooter added:", scooter.GetPath());
 		break;
 	}
   }

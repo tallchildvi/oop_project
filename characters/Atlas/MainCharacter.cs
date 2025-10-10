@@ -4,7 +4,7 @@ using System;
 
 public partial class MainCharacter : Area2D
 {
-	private float speed;
+	public float speed;
 	private Vector2 movement = Vector2.Zero;
 	private Vector2 originalWeaponScale;
 	private Vector2 originalCharacterScale;
@@ -150,5 +150,9 @@ public partial class MainCharacter : Area2D
 		bullet.GlobalPosition = spawnPos;
 		bullet.Init(movement, facingRight);
 		bulletReloadTimer = bulletReloadTime;
+	}
+	public void SetSpeed(float newSpeed)
+	{
+		speed = newSpeed;
 	}
 }

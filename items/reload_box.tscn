@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cfhg86e8plcwb"]
 
-[ext_resource type="Script" uid="uid://dbdbh8fpuce83" path="res://ReloadBox.cs" id="1_85hwo"]
+[ext_resource type="Script" uid="uid://dbdbh8fpuce83" path="res://items/ReloadBox.cs" id="1_85hwo"]
 [ext_resource type="Texture2D" uid="uid://b0irrqkyfvsfa" path="res://characters/textures/banana_box_30_500x500_.png" id="2_2kwqi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5bwcp"]
