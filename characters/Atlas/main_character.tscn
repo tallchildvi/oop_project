@@ -112,7 +112,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h888c"]
-size = Vector2(33, 60)
+size = Vector2(46.5, 63.5)
 
 [node name="main_character" type="Area2D"]
 script = ExtResource("1_omk6w")
@@ -133,6 +133,5 @@ position = Vector2(18.000008, -0.99998474)
 scale = Vector2(0.122420475, 0.11191859)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-2.5, 2)
+position = Vector2(-3, 0)
 shape = SubResource("RectangleShape2D_h888c")
