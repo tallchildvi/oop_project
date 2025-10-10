@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dpq4ja7dmsloa"
-path="res://.godot/imported/Atlas.png-7374341fd8307dd2c808377422fbb26a.ctex"
+uid="uid://bkxn7j016fy3q"
+path="res://.godot/imported/black_and_gold_falling_casino_playing_cards_with_poker_chips_on.png-f2e035e52d221e70cb1594486a739f68.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/Atlas/textures/Atlas.png"
-dest_files=["res://.godot/imported/Atlas.png-7374341fd8307dd2c808377422fbb26a.ctex"]
+source_file="res://characters/textures/black_and_gold_falling_casino_playing_cards_with_poker_chips_on.png"
+dest_files=["res://.godot/imported/black_and_gold_falling_casino_playing_cards_with_poker_chips_on.png-f2e035e52d221e70cb1594486a739f68.ctex"]
 
 [params]
 

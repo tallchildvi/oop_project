@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://chsol1815raqn"]
+
+[ext_resource type="Script" uid="uid://ce5mn28i55d4l" path="res://characters/trader/Trader.cs" id="1_f43ht"]
+[ext_resource type="Texture2D" uid="uid://1j3l1w1woonq" path="res://characters/textures/aaeb832687eaaa4d8e66d9e2b1bbbe75-removebg-preview.png" id="1_lgh5b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f43ht"]
+size = Vector2(223, 137)
+
+[node name="trader" type="Area2D"]
+position = Vector2(-1, 2)
+script = ExtResource("1_f43ht")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-27.5, -17.5)
+shape = SubResource("RectangleShape2D_f43ht")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-8, -23)
+scale = Vector2(-0.33290666, 0.29137552)
+texture = ExtResource("1_lgh5b")

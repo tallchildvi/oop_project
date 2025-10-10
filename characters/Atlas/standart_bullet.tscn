@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://6tqy1yxl18iv"]
 
-[ext_resource type="Texture2D" uid="uid://bb72mrn0fip5n" path="res://characters/Atlas/textures/bang.jpg" id="1_2ommj"]
+[ext_resource type="Texture2D" uid="uid://bb72mrn0fip5n" path="res://characters/textures/bang.jpg" id="1_2ommj"]
 [ext_resource type="Script" uid="uid://cq5xmo7r00jqt" path="res://characters/Atlas/StandartBullet.cs" id="1_2ugkg"]
 
 [node name="Standart_bullet" type="Sprite2D"]

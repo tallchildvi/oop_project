@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bb72mrn0fip5n"
-path="res://.godot/imported/bang.jpg-62eaca82dd45e2837ca399d783a9c88c.ctex"
+uid="uid://d1yv47mkfpd2v"
+path="res://.godot/imported/102396347.png-c84920177ab2277ee14244d1fad7c74e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/Atlas/textures/bang.jpg"
-dest_files=["res://.godot/imported/bang.jpg-62eaca82dd45e2837ca399d783a9c88c.ctex"]
+source_file="res://characters/textures/102396347.png"
+dest_files=["res://.godot/imported/102396347.png-c84920177ab2277ee14244d1fad7c74e.ctex"]
 
 [params]
 

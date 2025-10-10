@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://c83sbeq0thdvp"]
+
+[ext_resource type="Script" uid="uid://b6llmo6jnpln8" path="res://characters/trader/TraderMenu.cs" id="1_c0yiq"]
+[ext_resource type="Texture2D" uid="uid://1j3l1w1woonq" path="res://characters/textures/aaeb832687eaaa4d8e66d9e2b1bbbe75-removebg-preview.png" id="3_c0yiq"]
+[ext_resource type="Texture2D" uid="uid://crkcxrcj2ubu5" path="res://characters/textures/images__2_-removebg-preview.png" id="4_vjpr1"]
+[ext_resource type="Texture2D" uid="uid://btm66lcgh04qp" path="res://characters/textures/7168659.png" id="5_7sorx"]
+[ext_resource type="Texture2D" uid="uid://bkxn7j016fy3q" path="res://characters/textures/black_and_gold_falling_casino_playing_cards_with_poker_chips_on.png" id="5_c0yiq"]
+
+[node name="trader_menu" type="Node2D"]
+script = ExtResource("1_c0yiq")
+
+[node name="Aaeb832687Eaaa4d8e66d9e2b1Bbbe75RemovebgPreview" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(1018, 481)
+scale = Vector2(-1.10031, 1.2090218)
+texture = ExtResource("3_c0yiq")
+
+[node name="Images2RemovebgPreview" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(638.75, 338)
+scale = Vector2(1.7088888, 1.6400001)
+texture = ExtResource("4_vjpr1")
+
+[node name="spin_btn" type="Button" parent="."]
+offset_left = 889.0
+offset_top = 23.0
+offset_right = 1043.0
+offset_bottom = 91.0
+text = "SPIN!"
+
+[node name="spiner" type="Sprite2D" parent="."]
+z_index = 2
+position = Vector2(640, 339)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("5_7sorx")
+
+[node name="close_btn" type="Button" parent="."]
+offset_left = 1053.0
+offset_top = 22.0
+offset_right = 1115.0
+offset_bottom = 77.0
+text = "X"
+
+[node name="BlackAndGoldFallingCasinoPlayingCardsWithPokerChipsOn" type="Sprite2D" parent="."]
+position = Vector2(463.75003, 323.50003)
+scale = Vector2(1.3791292, 1.7200001)
+texture = ExtResource("5_c0yiq")

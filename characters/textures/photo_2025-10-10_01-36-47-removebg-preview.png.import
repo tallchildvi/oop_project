@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsyabiaj0kv43"
-path="res://.godot/imported/weapon.jpg-8a2af684620baf636e9f8cf57b8e1808.ctex"
+uid="uid://54cmuo83tni5"
+path="res://.godot/imported/photo_2025-10-10_01-36-47-removebg-preview.png-bd5df5b203f60050a4c55ba9c284b21e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://characters/Atlas/textures/weapon.jpg"
-dest_files=["res://.godot/imported/weapon.jpg-8a2af684620baf636e9f8cf57b8e1808.ctex"]
+source_file="res://characters/textures/photo_2025-10-10_01-36-47-removebg-preview.png"
+dest_files=["res://.godot/imported/photo_2025-10-10_01-36-47-removebg-preview.png-bd5df5b203f60050a4c55ba9c284b21e.ctex"]
 
 [params]
 

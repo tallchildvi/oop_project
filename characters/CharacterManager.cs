@@ -10,6 +10,9 @@ public partial class CharacterManager : Node2D
 	private float hp = 100;
 	private float bullet_counter = 5;
 	private bool exists = false;
+	public float currency = 0;
+	public bool allow_shop = false;
+  	public bool shop_exists = false;
 	
 	//public override void _Ready()
 	//{
@@ -23,6 +26,12 @@ public partial class CharacterManager : Node2D
 		{
 			characterBase = ResourceLoader.Load<PackedScene>("res://characters/Atlas/main_character.tscn");
 			SpawnCharacter();
+		}
+		if (Input.IsKeyPressed(Key.M) && allow_shop && !shop_exists){
+			PackedScene shopBase = ResourceLoader.Load<PackedScene>("res://characters/trader/trader_menu.tscn");
+			Node instance = shopBase.Instantiate();
+			AddChild(instance);
+			shop_exists = true;
 		}
 	}
 		
@@ -69,4 +78,24 @@ public partial class CharacterManager : Node2D
 		}
 		return false;
 	}
+	  public void addMoney(float money){
+	currency += money;
+  }
+
+  public void luck(int buff){
+	switch (buff){
+	  case 0:
+		Reload(2);
+		break;
+	  case 1:
+		Reload(5);
+		break;
+	  case 2:
+		Reload(10);
+		break;
+	  case 3:
+		Reload(15);
+		break;
+	}
+  }
 }
