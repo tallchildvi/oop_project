@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 EventManager="*res://scenes/EventManager.cs"
 MenuManager="*res://scenes/MenuManager.cs"
+ILevelBuilder="*res://scenes/ILevelBuilder.cs"
+LevelManager="*res://scenes/LevelBuilder.cs"
 
 [dotnet]
 

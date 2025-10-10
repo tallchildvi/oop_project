@@ -6,14 +6,14 @@ public partial class BaseMenu : Panel
 	public string MenuName { get; set; }
 	public override void _Ready()
 	{
-		var style = new StyleBoxFlat();  // простий прямокутний стиль
-		style.BgColor = new Color(0.694f, 0.6f, 0.467f, 0.9f); // колір фону
-		style.BorderColor = new Color(0.431f, 0.302f, 0.196f, 0.9f);      // колір рамки
+		var style = new StyleBoxFlat();
+		style.BgColor = new Color(0.694f, 0.6f, 0.467f, 0.9f); 
+		style.BorderColor = new Color(0.431f, 0.302f, 0.196f, 0.9f);    
 		style.BorderWidthLeft = 4;
 		style.BorderWidthTop = 4;
 		style.BorderWidthRight = 4;
 		style.BorderWidthBottom = 4;
-		style.ContentMarginLeft = 6;  // внутрішні відступи
+		style.ContentMarginLeft = 6; 
 		style.ContentMarginTop = 6;
 		style.ContentMarginRight = 6;
 		style.ContentMarginBottom = 6;
