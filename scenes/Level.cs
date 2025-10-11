@@ -3,99 +3,106 @@ using System;
 
 public class Level : Node
 {
-	private PackedScene _sceneResource;
-	private Node _sceneInstance;
-	private EnemyManager _enemyManager;
-	private Player _player;
-	private UIManager _uiManager;
-	private EventManager _eventManager;
-
+	public string MapName { get; set; }
+	public Player Player { get; set; }
+	public UIManager UI { get; set; }
+	public EnemyManager EnemyManager { get; set; }
+	public EnemyPool EnemyPool { get; set; }
 	private bool _isActive = false;
 
-	public Level(PackedScene sceneResource, EnemyManager enemyManager, Player player, UIManager uiManager, EventManager eventManager)
-	{
-		_sceneResource = sceneResource;
-		_enemyManager = enemyManager;
-		_player = player;
-		_uiManager = uiManager;
-		_eventManager = eventManager;
-	}
-	
-	public void Initialize()
-	{
-		_eventManager.Subscribe("PauseGame", OnPause);
-		_eventManager.Subscribe("ResumeGame", OnResume);
-		_eventManager.Subscribe("EnemyKilled", OnEnemyKilled);
-		_eventManager.Subscribe("PlayerDied", OnPlayerDied);
+	private int _currentWave = 0;
+	private int _maxWaves = 5;
+	private int _baseEnemies = 3;
+	private float _difficultyMultiplier = 1.25f;
 
-		_sceneInstance = _sceneResource.Instantiate();
-		AddChild(_sceneInstance);
-
-		_sceneInstance.AddChild(_enemyManager);
-		_sceneInstance.AddChild(_player);
-		_sceneInstance.AddChild(_uiManager);
+	public override void _Ready()
+	{
+		EventManager.Subscribe("PAUSE_GAME", OnPause);
+		EventManager.Subscribe("RESUME_GAME", OnResume);
+		EventManager.Subscribe("ENEMY_KILLED", OnEnemyKilled);
+		EventManager.Subscribe("GAME_OVER", OnPlayerDied);
 	}
 
 	public void Start()
 	{
-
 		_isActive = true;
-
 		_eventManager.Emit("OnLevelStarted", this);
+//change to event system
+		UI.Show();
+		Player.EnableControl(true);
 
-		_enemyManager.Activate();
-		_uiManager.Show();
-		_player.EnableControl(true);
+		GD.Print("Starting wave system...");
+		StartNextWave();
 	}
 
-	private void OnPause(object data)
+	private void StartNextWave()
 	{
-		if (!_isActive) return;
+		//if (_currentWave >= _maxWaves)
+		//{
+			//GD.Print("All waves completed!");
+			//_eventManager.Emit("OnLevelCleared", this);
+			//return;
+		//}
 
-		_isActive = false;
-		_player.EnableControl(false);
-		_enemyManager.Pause();
-		_uiManager.ShowPauseMenu();
+		_currentWave++;
+		GD.Print($"=== Starting Wave {_currentWave} ===");
 
-		GD.Print("Level paused");
+		int enemyCount = CalculateEnemyCount(_currentWave);
+		EnemyManager.SpawnWave(enemyCount, EnemyPool);
+
+		//UI.UpdateWaveCounter(_currentWave, _maxWaves);
 	}
 
-	private void OnResume(object data)
+	private int CalculateEnemyCount(int wave)
 	{
-		_isActive = true;
-		_player.EnableControl(true);
-		_enemyManager.Resume();
-		_uiManager.HidePauseMenu();
-
-		GD.Print("Level resumed");
+		return Mathf.RoundToInt(_baseEnemies * Mathf.Pow(_difficultyMultiplier, wave - 1));
 	}
 
-	// 💀 4. Завершення
-	public void End()
-	{
-		GD.Print("Level ended");
-		_isActive = false;
-
-		_eventManager.Emit("OnLevelEnded", this);
-		_eventManager.UnsubscribeAll(this);
-
-		QueueFree();
-	}
-
-	// 🧩 5. Реакція на події
 	private void OnEnemyKilled(object enemy)
 	{
-		GD.Print($"Enemy killed: {enemy}");
-
-		if (_enemyManager.IsCleared())
+		if (enemy is Enemy e)
 		{
-			_eventManager.Emit("OnLevelCompleted", this);
+			EnemyPool.ReturnEnemy(e);
+		}
+
+		if (EnemyManager.IsCleared())
+		{
+			GD.Print("Wave cleared!");
+			_eventManager.Emit("OnWaveCleared", _currentWave);
+
+			GetTree().CreateTimer(2.0f).Timeout += StartNextWave;
 		}
 	}
 
 	private void OnPlayerDied(object data)
 	{
 		GD.Print("Player died");
-		_eventManager.Emit("OnLevelFailed", this);
+		EvenManager.TriggerEvent("OnLevelFailed", this);
+	}
+
+	private void OnPause(object data)
+	{
+		if (!_isActive) return;
+		_isActive = false;
+		Player.EnableControl(false);
+		EnemyManager.Pause();
+		UI.ShowPauseMenu();
+	}
+
+	private void OnResume(object data)
+	{
+		_isActive = true;
+		Player.EnableControl(true);
+		EnemyManager.Resume();
+		UI.HidePauseMenu();
+	}
+
+	public void End()
+	{
+		GD.Print("Level ended");
+		_isActive = false;
+		_eventManager.Emit("OnLevelEnded", this);
+		_eventManager.UnsubscribeAll(this);
+		QueueFree();
 	}
 }

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://7ieh3off2j1v"]
+
+[ext_resource type="Texture2D" uid="uid://bdsveix2af8ij" path="res://Source/Level1_floor.jpg" id="1_w77jt"]
+
+[node name="Level1" type="Node2D"]
+position = Vector2(-3, -6)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 698.0
+size_flags_vertical = 4
+texture = ExtResource("1_w77jt")

@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://d0l7c1su2o5xm"]
 
-[ext_resource type="Script" uid="uid://dvk257t4xhsir" path="res://scenes/MainMenu.cs" id="1_bqqt6"]
-[ext_resource type="Texture2D" uid="uid://b8bxp4tpr3ibv" path="res://source/main_menu_background.png" id="1_ekxnf"]
-[ext_resource type="Script" uid="uid://caddgi02gdv2d" path="res://scenes/SettingsMenu.cs" id="3_rtw2f"]
-[ext_resource type="Script" uid="uid://bavyc87p0iqvl" path="res://scenes/EventManager.cs" id="4_wu84c"]
-[ext_resource type="Script" uid="uid://ct1gyun7pmurc" path="res://scenes/MenuManager.cs" id="5_8ln24"]
-[ext_resource type="Script" uid="uid://b2sp7ux6lbe18" path="res://scenes/BaseMenu.cs" id="6_rtw2f"]
+[ext_resource type="Script" uid="uid://dvk257t4xhsir" path="res://Scenes/MainMenu.cs" id="1_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://b8bxp4tpr3ibv" path="res://Source/main_menu_background.png" id="1_ekxnf"]
+[ext_resource type="Script" uid="uid://caddgi02gdv2d" path="res://Scenes/SettingsMenu.cs" id="3_rtw2f"]
+[ext_resource type="Script" uid="uid://bavyc87p0iqvl" path="res://Scenes/EventManager.cs" id="4_wu84c"]
+[ext_resource type="Script" uid="uid://ct1gyun7pmurc" path="res://Scenes/MenuManager.cs" id="5_8ln24"]
+[ext_resource type="Script" uid="uid://b2sp7ux6lbe18" path="res://Scenes/BaseMenu.cs" id="6_rtw2f"]
 
 [sub_resource type="SystemFont" id="SystemFont_wu84c"]
 font_names = PackedStringArray("Impact")

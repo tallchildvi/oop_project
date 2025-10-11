@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public partial class EventManager : Control
 {
-	//щоб мати доступ до дерева подій і наслідувати node
 	public static EventManager Instance { get; private set; }
 	private static Dictionary<string, Action<object>> eventDictionary = new();
 

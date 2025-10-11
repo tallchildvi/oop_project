@@ -11,16 +11,16 @@ config_version=5
 [application]
 
 config/name="oop_project"
-run/main_scene="res://scenes/main_menu.tscn"
+run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
 
 [autoload]
 
-EventManager="*res://scenes/EventManager.cs"
-MenuManager="*res://scenes/MenuManager.cs"
-ILevelBuilder="*res://scenes/ILevelBuilder.cs"
-LevelManager="*res://scenes/LevelBuilder.cs"
+EventManager="*res://Scenes/EventManager.cs"
+MenuManager="*res://Scenes/MenuManager.cs"
+ILevelBuilder="*res://Scenes/ILevelBuilder.cs"
+LevelManager="*res://Scenes/LevelBuilder.cs"
 
 [dotnet]
 

@@ -28,5 +28,6 @@ public partial class MainMenu : Control{
 		
 		
 		_settingsButton.Pressed += () => EventManager.TriggerEvent("OPEN_MENU", "SettingsMenu");
+		_playButton.Pressed += () => EventManager.TriggerEvent("START_GAME");
 	}
 }
