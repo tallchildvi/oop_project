@@ -18,9 +18,7 @@ public partial class EnemyManager : Node
 
 	public void Initialize(EnemyPool enemyPool)
 	{
-		_eventManager = eventManager;
 		_enemyPool = enemyPool;
-
 		_spawnTimer = new Timer
 		{
 			OneShot = false,
@@ -94,17 +92,16 @@ public partial class EnemyManager : Node
 		_activeEnemies.Remove(enemy);
 		_enemyPool.ReturnEnemy(enemy);
 
-		_eventManager.Emit("ENEMY_KILLED", enemy);
+		EventManager.TriggerEvent("ENEMY_KILLED", enemy);
 
 		if (IsCleared())
 		{
 			GD.Print("[EnemyManager] Wave cleared!");
 			_waveInProgress = false;
-			_eventManager.Emit("WAVE_CLEARED", this);
+			EventManager.TriggerEvent("WAVE_CLEARED", this);
 		}
 	}
 
-	// === 5️⃣ КЕРУВАННЯ ===
 	public bool IsCleared()
 	{
 		return !_waveInProgress || (_activeEnemies.Count == 0 && _spawnedEnemies >= _enemiesToSpawn);

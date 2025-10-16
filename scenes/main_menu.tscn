@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0l7c1su2o5xm"]
+[gd_scene load_steps=13 format=3 uid="uid://d0l7c1su2o5xm"]
 
 [ext_resource type="Script" uid="uid://dvk257t4xhsir" path="res://Scenes/MainMenu.cs" id="1_bqqt6"]
 [ext_resource type="Texture2D" uid="uid://b8bxp4tpr3ibv" path="res://Source/main_menu_background.png" id="1_ekxnf"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://bavyc87p0iqvl" path="res://Scenes/EventManager.cs" id="4_wu84c"]
 [ext_resource type="Script" uid="uid://ct1gyun7pmurc" path="res://Scenes/MenuManager.cs" id="5_8ln24"]
 [ext_resource type="Script" uid="uid://b2sp7ux6lbe18" path="res://Scenes/BaseMenu.cs" id="6_rtw2f"]
+[ext_resource type="Script" uid="uid://5fdxwb6ocmnf" path="res://Scenes/GameManager.cs" id="7_cp0ys"]
+[ext_resource type="Script" uid="uid://d14rl5f0j54uk" path="res://Scenes/LevelBuilder.cs" id="8_yhxw7"]
 
 [sub_resource type="SystemFont" id="SystemFont_wu84c"]
 font_names = PackedStringArray("Impact")
@@ -226,3 +228,15 @@ offset_top = 31.0
 offset_right = 242.0
 offset_bottom = 71.0
 script = ExtResource("6_rtw2f")
+
+[node name="GameManager" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_cp0ys")
+
+[node name="LevelBuilder" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("8_yhxw7")

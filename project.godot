@@ -19,8 +19,15 @@ config/icon="res://icon.svg"
 
 EventManager="*res://Scenes/EventManager.cs"
 MenuManager="*res://Scenes/MenuManager.cs"
-ILevelBuilder="*res://Scenes/ILevelBuilder.cs"
 LevelManager="*res://Scenes/LevelBuilder.cs"
+Level="*res://Levels/Level.cs"
+BaseMenu="*res://Scenes/BaseMenu.cs"
+EnemyPool="*res://Scenes/EnemyPool.cs"
+GameManager="*res://Scenes/GameManager.cs"
+MainMenu="*res://Scenes/MainMenu.cs"
+Player="*res://Scenes/Player.cs"
+Enemy="*res://Scenes/Enemy.cs"
+SettingsMenu="*res://Scenes/SettingsMenu.cs"
 
 [dotnet]
 

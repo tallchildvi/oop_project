@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dosdat32olhlk"]
+
+[ext_resource type="Script" uid="uid://40g2gw8qc515" path="res://LevelUI.cs" id="1_awnb2"]
+[ext_resource type="PackedScene" uid="uid://bhau5jykqkj48" path="res://Source/joy_stick.tscn" id="1_ktgpk"]
+
+[node name="LevelUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_awnb2")
+
+[node name="JoyStick" parent="." instance=ExtResource("1_ktgpk")]

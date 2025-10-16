@@ -1,11 +1,11 @@
 using Godot;
 using System;
 
-public class Level : Node
+public partial class Level : Node
 {
 	public string MapName { get; set; }
 	public Player Player { get; set; }
-	public UIManager UI { get; set; }
+	public LevelUI UI { get; set; }
 	public EnemyManager EnemyManager { get; set; }
 	public EnemyPool EnemyPool { get; set; }
 	private bool _isActive = false;
@@ -25,13 +25,18 @@ public class Level : Node
 
 	public void Start()
 	{
+		GD.Print("=== Level.Start() ===");
+		GD.Print($"UI == null? {UI == null}");
+		GD.Print($"Player == null? {Player == null}");
+		GD.Print($"EnemyManager == null? {EnemyManager == null}");
 		_isActive = true;
-		_eventManager.Emit("OnLevelStarted", this);
+		EventManager.TriggerEvent("LEVEL_STARTED", this);
 //change to event system
-		UI.Show();
+		//UI.Show();
 		Player.EnableControl(true);
 
 		GD.Print("Starting wave system...");
+		//GetTree().ChangeSceneToFile("res://Levels/Level1.tscn");
 		StartNextWave();
 	}
 
@@ -48,7 +53,7 @@ public class Level : Node
 		GD.Print($"=== Starting Wave {_currentWave} ===");
 
 		int enemyCount = CalculateEnemyCount(_currentWave);
-		EnemyManager.SpawnWave(enemyCount, EnemyPool);
+		EnemyManager.StartWave(enemyCount);
 
 		//UI.UpdateWaveCounter(_currentWave, _maxWaves);
 	}
@@ -68,7 +73,7 @@ public class Level : Node
 		if (EnemyManager.IsCleared())
 		{
 			GD.Print("Wave cleared!");
-			_eventManager.Emit("OnWaveCleared", _currentWave);
+			EventManager.TriggerEvent("OnWaveCleared", _currentWave);
 
 			GetTree().CreateTimer(2.0f).Timeout += StartNextWave;
 		}
@@ -77,7 +82,7 @@ public class Level : Node
 	private void OnPlayerDied(object data)
 	{
 		GD.Print("Player died");
-		EvenManager.TriggerEvent("OnLevelFailed", this);
+		EventManager.TriggerEvent("OnLevelFailed", this);
 	}
 
 	private void OnPause(object data)
@@ -86,7 +91,7 @@ public class Level : Node
 		_isActive = false;
 		Player.EnableControl(false);
 		EnemyManager.Pause();
-		UI.ShowPauseMenu();
+		EventManager.TriggerEvent("OPEN_MENU", "PauseMenu");
 	}
 
 	private void OnResume(object data)
@@ -94,15 +99,14 @@ public class Level : Node
 		_isActive = true;
 		Player.EnableControl(true);
 		EnemyManager.Resume();
-		UI.HidePauseMenu();
+		EventManager.TriggerEvent("CLOSE_MENU", "PauseMenu");
 	}
 
 	public void End()
 	{
 		GD.Print("Level ended");
 		_isActive = false;
-		_eventManager.Emit("OnLevelEnded", this);
-		_eventManager.UnsubscribeAll(this);
+		EventManager.TriggerEvent("OnLevelEnded", this);
 		QueueFree();
 	}
 }

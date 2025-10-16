@@ -8,9 +8,12 @@ public partial class GameManager : Node
 		GD.Print("GameLoader: initializing...");
 		EventManager.Subscribe("START_GAME", StartGame);
 	}
-	public void StartGame()
+	public void StartGame(object _)
 	{
+		GD.Print("GameManager: StartGame triggered!");
 		var builder = new LevelBuilder();
+		builder.StartBuilding();
+		AddChild(builder);
 		builder.BuildMap("Level1");
 		builder.BuildPlayer("main_character");
 		builder.BuildEnemies(3);

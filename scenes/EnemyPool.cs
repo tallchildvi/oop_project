@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public class EnemyPool : Node
+public partial class EnemyPool : Node
 {
 	private PackedScene _enemyScene;
 	private Queue<Enemy> _pool = new Queue<Enemy>();

@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class MainCharacter : Sprite2D
+public partial class MainCharacter : Player
 {
 	private float speed = 200f;
 	private Vector2 originalWeaponScale;

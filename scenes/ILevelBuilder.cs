@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public interface ILevelBuilder 
+public interface ILevelBuilder
 {
 	void BuildMap(string mapName);
 	void BuildPlayer(string characterId);
