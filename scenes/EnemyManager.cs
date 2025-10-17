@@ -1,11 +1,9 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 public partial class EnemyManager : Node
 {
 	private EnemyPool _enemyPool;
-
 	private List<Enemy> _activeEnemies = new();
 	private int _enemiesToSpawn = 0;
 	private int _spawnedEnemies = 0;
@@ -16,9 +14,11 @@ public partial class EnemyManager : Node
 
 	private Timer _spawnTimer;
 
-	public void Initialize(EnemyPool enemyPool)
+	public void Initialize(EnemyPool enemyPool, float spawnInterval = 0.8f)
 	{
 		_enemyPool = enemyPool;
+		_spawnInterval = spawnInterval;
+
 		_spawnTimer = new Timer
 		{
 			OneShot = false,
@@ -28,7 +28,6 @@ public partial class EnemyManager : Node
 		_spawnTimer.Timeout += OnSpawnTimerTimeout;
 	}
 
-	// === 2️⃣ СТАРТ ХВИЛІ ===
 	public void StartWave(int enemyCount)
 	{
 		if (_waveInProgress)
@@ -43,11 +42,9 @@ public partial class EnemyManager : Node
 		_activeEnemies.Clear();
 
 		GD.Print($"[EnemyManager] Starting new wave: {enemyCount} enemies");
-
 		_spawnTimer.Start();
 	}
 
-	// === 3️⃣ СПАВН ===
 	private void OnSpawnTimerTimeout()
 	{
 		if (_isPaused) return;
@@ -62,17 +59,12 @@ public partial class EnemyManager : Node
 		var enemy = _enemyPool.GetEnemy();
 		if (enemy == null)
 		{
-			GD.PrintErr("[EnemyManager] Pool empty! Could not spawn enemy.");
+			GD.PrintErr("[EnemyManager] Could not spawn enemy (pool empty).");
 			return;
 		}
 
-		// Встановлення позиції (можна вдосконалити)
 		enemy.Position = GetRandomSpawnPosition();
-
-		AddChild(enemy);
 		_activeEnemies.Add(enemy);
-
-		// Підписка на подію смерті
 		enemy.Died += OnEnemyDied;
 
 		_spawnedEnemies++;
@@ -84,7 +76,6 @@ public partial class EnemyManager : Node
 		return new Vector2(rand.RandfRange(-300, 300), rand.RandfRange(-200, 200));
 	}
 
-	// === 4️⃣ СМЕРТЬ ВОРОГА ===
 	private void OnEnemyDied(Enemy enemy)
 	{
 		if (!_activeEnemies.Contains(enemy)) return;
@@ -102,10 +93,8 @@ public partial class EnemyManager : Node
 		}
 	}
 
-	public bool IsCleared()
-	{
-		return !_waveInProgress || (_activeEnemies.Count == 0 && _spawnedEnemies >= _enemiesToSpawn);
-	}
+	public bool IsCleared() =>
+		!_waveInProgress || (_activeEnemies.Count == 0 && _spawnedEnemies >= _enemiesToSpawn);
 
 	public void Pause()
 	{
@@ -126,9 +115,7 @@ public partial class EnemyManager : Node
 		foreach (var e in _activeEnemies)
 		{
 			if (IsInstanceValid(e))
-			{
-				e.QueueFree();
-			}
+				e.Visible = false;
 		}
 		_activeEnemies.Clear();
 	}
