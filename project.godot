@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="oop_project"
-run/main_scene="res://Scenes/main_menu.tscn"
+run/main_scene="uid://d0l7c1su2o5xm"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
 
@@ -25,7 +25,7 @@ BaseMenu="*res://Scenes/BaseMenu.cs"
 EnemyPool="*res://Scenes/EnemyPool.cs"
 GameManager="*res://Scenes/GameManager.cs"
 MainMenu="*res://Scenes/MainMenu.cs"
-Player="*res://Scenes/Player.cs"
+Player="*res://Scenes/BaseCharacter.cs"
 Enemy="*res://Scenes/Enemy.cs"
 SettingsMenu="*res://Scenes/SettingsMenu.cs"
 

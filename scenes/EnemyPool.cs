@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public partial class EnemyPool : Node
 {
 	private PackedScene _enemyScene;
-	private Queue<Enemy> _pool = new Queue<Enemy>();
+	private Queue<BaseEnemy> _pool = new Queue<BaseEnemy>();
 	private int _initialSize = 10;
 	private Node _spawnParent; // Куди додавати ворогів у сцені (наприклад, Level)
 
@@ -14,7 +14,7 @@ public partial class EnemyPool : Node
 		_spawnParent = spawnParent;
 		_initialSize = initialSize;
 	}
-
+	
 	public override void _Ready()
 	{
 		if (_enemyScene == null || _spawnParent == null)
@@ -31,23 +31,23 @@ public partial class EnemyPool : Node
 		}
 	}
 
-	private Enemy CreateNewEnemy()
+	private BaseEnemy CreateNewEnemy()
 	{
-		var enemy = _enemyScene.Instantiate<Enemy>();
+		var enemy = _enemyScene.Instantiate<BaseEnemy>();
 		_spawnParent.CallDeferred("add_child", enemy);
 		enemy.Visible = false;
 		return enemy;
 	}
 
-	public Enemy GetEnemy()
+	public BaseEnemy GetEnemy()
 	{
-		Enemy enemy = _pool.Count > 0 ? _pool.Dequeue() : CreateNewEnemy();
+		BaseEnemy enemy = _pool.Count > 0 ? _pool.Dequeue() : CreateNewEnemy();
 		enemy.Visible = true;
 		enemy.ResetState();
 		return enemy;
 	}
 
-	public void ReturnEnemy(Enemy enemy)
+	public void ReturnEnemy(BaseEnemy enemy)
 	{
 		if (enemy == null || !IsInstanceValid(enemy)) return;
 

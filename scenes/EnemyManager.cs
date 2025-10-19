@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public partial class EnemyManager : Node
 {
 	private EnemyPool _enemyPool;
-	private List<Enemy> _activeEnemies = new();
+	private List<BaseEnemy> _activeEnemies = new();
 	private int _enemiesToSpawn = 0;
 	private int _spawnedEnemies = 0;
 
@@ -76,7 +76,7 @@ public partial class EnemyManager : Node
 		return new Vector2(rand.RandfRange(-300, 300), rand.RandfRange(-200, 200));
 	}
 
-	private void OnEnemyDied(Enemy enemy)
+	private void OnEnemyDied(BaseEnemy enemy)
 	{
 		if (!_activeEnemies.Contains(enemy)) return;
 

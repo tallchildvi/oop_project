@@ -4,7 +4,7 @@ using System;
 public partial class Level : Node
 {
 	public string MapName { get; set; }
-	public Player Player { get; set; }
+	public BaseCharacter Player { get; set; }
 	public LevelUI UI { get; set; }
 	public EnemyManager EnemyManager { get; set; }
 	public EnemyPool EnemyPool { get; set; }
@@ -33,10 +33,9 @@ public partial class Level : Node
 		EventManager.TriggerEvent("LEVEL_STARTED", this);
 //change to event system
 		//UI.Show();
-		Player.EnableControl(true);
+		Player.EnableControl();
 
 		GD.Print("Starting wave system...");
-		//GetTree().ChangeSceneToFile("res://Levels/Level1.tscn");
 		StartNextWave();
 	}
 
@@ -65,7 +64,7 @@ public partial class Level : Node
 
 	private void OnEnemyKilled(object enemy)
 	{
-		if (enemy is Enemy e)
+		if (enemy is BaseEnemy e)
 		{
 			EnemyPool.ReturnEnemy(e);
 		}
@@ -89,7 +88,7 @@ public partial class Level : Node
 	{
 		if (!_isActive) return;
 		_isActive = false;
-		Player.EnableControl(false);
+		Player.DisableControl();
 		EnemyManager.Pause();
 		EventManager.TriggerEvent("OPEN_MENU", "PauseMenu");
 	}
@@ -97,7 +96,7 @@ public partial class Level : Node
 	private void OnResume(object data)
 	{
 		_isActive = true;
-		Player.EnableControl(true);
+		Player.EnableControl();
 		EnemyManager.Resume();
 		EventManager.TriggerEvent("CLOSE_MENU", "PauseMenu");
 	}

@@ -15,7 +15,7 @@ public partial class GameManager : Node
 		builder.StartBuilding();
 		AddChild(builder);
 		builder.BuildMap("Level1");
-		builder.BuildPlayer("main_character");
+		builder.BuildPlayer("Atlas");
 		builder.BuildEnemies(3);
 		builder.BuildUI();
 		var level = builder.GetResult();

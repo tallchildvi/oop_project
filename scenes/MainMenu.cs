@@ -11,7 +11,7 @@ public partial class MainMenu : Control{
 		EventManager.TriggerEvent("CLOSE_ALL_MENUS");
 		_playButton = GetNode<TextureButton>("MarginContainer/VBoxContainer/HBoxContainer/play_button");
 		_settingsButton = GetNode<TextureButton>("MarginContainer/VBoxContainer/HBoxContainer/settings_button");
-		 _settingsPopup = GetNode<Panel>("SettingsMenu");
+		_settingsPopup = GetNode<Panel>("SettingsMenu");
 		
 		_playButton.TextureNormal = GD.Load<Texture2D>("res://source/button_play.png");
 		_playButton.Size = new Vector2(100, 100);
@@ -29,5 +29,6 @@ public partial class MainMenu : Control{
 		
 		_settingsButton.Pressed += () => EventManager.TriggerEvent("OPEN_MENU", "SettingsMenu");
 		_playButton.Pressed += () => EventManager.TriggerEvent("START_GAME");
+		
 	}
 }

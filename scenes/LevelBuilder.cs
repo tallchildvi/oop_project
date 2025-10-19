@@ -14,7 +14,6 @@ public partial class LevelBuilder : Node, ILevelBuilder
 	{
 		var levelScene = GD.Load<PackedScene>("res://Levels/Level1.tscn");
 		_currentLevel = levelScene.Instantiate<Level>();
-		// Не додаємо у сцену тут — це зробить GameManager
 	}
 
 	public void CancelBuildingLevel(object _) => _currentLevel = null;
@@ -31,15 +30,19 @@ public partial class LevelBuilder : Node, ILevelBuilder
 
 	public void BuildPlayer(string characterId)
 	{
-		var playerScene = GD.Load<PackedScene>($"res://Characters/{characterId}.tscn");
-		var player = playerScene.Instantiate<Player>();
+		var playerScene = GD.Load<PackedScene>($"res://Characters/{characterId}/{characterId}.tscn");
+		if (playerScene == null) GD.Print("player scene is null");
+		else GD.Print("player scene has found");
+		var player = playerScene.Instantiate<BaseCharacter>();
+		if (player == null) GD.Print("player is null");
+		else GD.Print("player has found");
 		_currentLevel.Player = player;
 		_currentLevel.AddChild(player);
 	}
 
 	public void BuildEnemies(int baseDifficulty = 1)
 	{
-		var enemyScene = GD.Load<PackedScene>("res://Scenes/Enemy.tscn");
+		var enemyScene = GD.Load<PackedScene>("res://Enemies/Enemy1.tscn");
 
 		var enemyPool = new EnemyPool();
 		enemyPool.Initialize(enemyScene, _currentLevel, baseDifficulty * 3);
@@ -47,7 +50,6 @@ public partial class LevelBuilder : Node, ILevelBuilder
 		var enemyManager = new EnemyManager();
 		enemyManager.Initialize(enemyPool);
 
-		// Тільки після Initialize() додаємо в сцену — тоді _Ready() виконається з коректними полями
 		_currentLevel.AddChild(enemyPool);
 		_currentLevel.AddChild(enemyManager);
 

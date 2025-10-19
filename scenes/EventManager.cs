@@ -7,12 +7,10 @@ public partial class EventManager : Control
 {
 	public static EventManager Instance { get; private set; }
 	private static Dictionary<string, Action<object>> eventDictionary = new();
-
 	public override void _Ready()
 	{
 		Instance = this;
 	}
-
 	public override void _ExitTree()
 	{
 		eventDictionary.Clear();

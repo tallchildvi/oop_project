@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqq562p2gkyxe"]
+
+[ext_resource type="Texture2D" uid="uid://bj8p2kghhi5no" path="res://enemies/textures/fireball.png" id="2_y8aaw"]
+
+[sub_resource type="CSharpScript" id="CSharpScript_p3c2h"]
+script/source = "using Godot;
+using System;
+
+public partial class EnemyBullet : Area2D
+{
+	public override void _Ready()
+	{
+		// Just print a debug message when the bullet is ready
+		GD.Print(\"EnemyBullet is ready.\");
+	}
+}
+"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v2yq7"]
+radius = 183.76343
+
+[node name="Enemy_bullet" type="Area2D"]
+script = SubResource("CSharpScript_p3c2h")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7, 3)
+scale = Vector2(0.5967542, 0.596754)
+texture = ExtResource("2_y8aaw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16, 2)
+shape = SubResource("CircleShape2D_v2yq7")
