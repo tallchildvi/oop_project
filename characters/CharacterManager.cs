@@ -3,6 +3,9 @@ using System;
 
 public partial class CharacterManager : Node2D
 {
+	public Node2D Player;
+
+	
 	private PackedScene characterBase;
 	private PackedScene characterTombstoneBase;
 	private MainCharacter character;

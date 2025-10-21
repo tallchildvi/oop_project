@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://coxglqhxehbe3"]
+
+[ext_resource type="Texture2D" uid="uid://dmmaifcnes50v" path="res://enemies/textures/camel.png" id="1_gdh86"]
+[ext_resource type="Script" uid="uid://dat0lk53sm2qw" path="res://enemies/camel/Camel.cs" id="1_iynmw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iynmw"]
+radius = 122.03688
+
+[node name="Jereb Area2D" type="Area2D"]
+script = ExtResource("1_iynmw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 6)
+scale = Vector2(0.40399998, 0.40399998)
+texture = ExtResource("1_gdh86")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 2)
+shape = SubResource("CircleShape2D_iynmw")

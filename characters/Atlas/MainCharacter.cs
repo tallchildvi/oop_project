@@ -26,6 +26,8 @@ public partial class MainCharacter : Area2D
 	
 	public override void _Ready()
 	{
+		AddToGroup("player");
+		
 		weapon = GetNode<AnimatedSprite2D>("Weapon2D");
 		characterSprite = GetNode<AnimatedSprite2D>("Character2D");
 		manager = GetParent() as CharacterManager;
