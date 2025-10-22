@@ -25,7 +25,7 @@ public partial class LevelBuilder : Node, ILevelBuilder
 		var mapInstance = mapScene.Instantiate<Node>();
 
 		_currentLevel.MapName = mapName;
-		_currentLevel.AddChild(mapInstance);
+		//_currentLevel.AddChild(mapInstance);
 	}
 
 	public void BuildPlayer(string characterId)
@@ -37,7 +37,9 @@ public partial class LevelBuilder : Node, ILevelBuilder
 		if (player == null) GD.Print("player is null");
 		else GD.Print("player has found");
 		_currentLevel.Player = player;
+		GD.Print($"{_currentLevel.Player.speed}");
 		_currentLevel.AddChild(player);
+
 	}
 
 	public void BuildEnemies(int baseDifficulty = 1)

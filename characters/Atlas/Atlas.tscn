@@ -116,6 +116,12 @@ size = Vector2(33, 60)
 
 [node name="Atlas" type="Area2D"]
 script = ExtResource("1_omk6w")
+speed = null
+dashSpeed = null
+dashTime = null
+dashReloadTime = null
+bulletReloadTime = null
+maxHealth = null
 
 [node name="Character2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, 1)

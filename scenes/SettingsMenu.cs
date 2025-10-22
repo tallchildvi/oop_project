@@ -1,7 +1,8 @@
 using Godot;
 using System;
 
-public partial class SettingsMenu : BaseMenu{
+public partial class SettingsMenu : BaseMenu
+{
 	private HSlider _musicSlider;
 	private HSlider _sfxSlider;
 	private OptionButton _languageSelector;
@@ -9,12 +10,13 @@ public partial class SettingsMenu : BaseMenu{
 
    public override void _Ready()
 	{
-		
 		MenuName = "SettingsMenu";
 		base._Ready();
-		_musicSlider = GetNode<HSlider>("VBoxContainer/music_box/HSlider");
-		_languageSelector = GetNode<OptionButton>("VBoxContainer/language_box/OptionButton");
-		_backBtn = GetNode<Button>("VBoxContainer/Button");
+		GD.Print("SettingsMenu Ready");
+		_musicSlider = GetNodeOrNull<HSlider>("VBoxContainer/music_box/HSlider");
+		_languageSelector = GetNodeOrNull<OptionButton>("VBoxContainer/language_box/OptionButton");
+		_backBtn = GetNodeOrNull<Button>("VBoxContainer/Button");
+		
 
 		if (_musicSlider == null) GD.PrintErr("MusicSlider not found!");
 		if (_languageSelector == null) GD.PrintErr("LanguageSelector not found!");
@@ -27,6 +29,12 @@ public partial class SettingsMenu : BaseMenu{
 		
 		lineStyle.ContentMarginTop = 6;
 		lineStyle.ContentMarginBottom = 6;
+		
+		if (_musicSlider == null)
+		{
+			GD.PrintErr("_volumeSlider is null! Check export or GetNode path.");
+			return;
+		}
 
 		_musicSlider.AddThemeStyleboxOverride("slider", lineStyle);
 		_musicSlider.AddThemeStyleboxOverride("slider_fill", fillStyle);

@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class EnemyManager : Node
@@ -36,6 +37,12 @@ public partial class EnemyManager : Node
 			return;
 		}
 
+		if (_enemyPool == null)
+		{
+			GD.PrintErr("[EnemyManager] EnemyPool is null, cannot start wave");
+			return;
+		}
+
 		_waveInProgress = true;
 		_enemiesToSpawn = enemyCount;
 		_spawnedEnemies = 0;
@@ -63,7 +70,10 @@ public partial class EnemyManager : Node
 			return;
 		}
 
+		// Встановлюємо позицію до активації, або після отримання: тут генеруємо випадкову позицію
 		enemy.Position = GetRandomSpawnPosition();
+		enemy.Visible = true;
+		enemy.ResetState(); // переконаємось, що стани скинуті
 		_activeEnemies.Add(enemy);
 		enemy.Died += OnEnemyDied;
 
@@ -72,12 +82,19 @@ public partial class EnemyManager : Node
 
 	private Vector2 GetRandomSpawnPosition()
 	{
+		var displaySize = DisplayServer.ScreenGetSize(DisplayServer.WindowGetCurrentScreen());
 		var rand = new RandomNumberGenerator();
-		return new Vector2(rand.RandfRange(-300, 300), rand.RandfRange(-200, 200));
+		rand.Randomize();
+		return new Vector2(rand.RandfRange( 100, displaySize.X - 100), rand.RandfRange( 50, displaySize.Y));
 	}
 
 	private void OnEnemyDied(BaseEnemy enemy)
 	{
+		if (enemy == null) return;
+
+		// Відписуємось від події
+		enemy.Died -= OnEnemyDied;
+
 		if (!_activeEnemies.Contains(enemy)) return;
 
 		_activeEnemies.Remove(enemy);
@@ -101,6 +118,7 @@ public partial class EnemyManager : Node
 		_isPaused = true;
 		foreach (var e in _activeEnemies)
 			e.Pause();
+		_spawnTimer.Stop();
 	}
 
 	public void Resume()
@@ -108,21 +126,21 @@ public partial class EnemyManager : Node
 		_isPaused = false;
 		foreach (var e in _activeEnemies)
 			e.Resume();
+		if (_waveInProgress)
+			_spawnTimer.Start();
 	}
 
-	public void ClearAllEnemies()
+	public void Clear()
 	{
 		foreach (var e in _activeEnemies)
 		{
-			if (IsInstanceValid(e))
-				e.Visible = false;
+			e.Died -= OnEnemyDied;
+			_enemyPool.ReturnEnemy(e);
 		}
 		_activeEnemies.Clear();
-	}
-
-	public override void _ExitTree()
-	{
-		_spawnTimer?.Stop();
-		ClearAllEnemies();
+		_spawnTimer.Stop();
+		_waveInProgress = false;
+		_enemiesToSpawn = 0;
+		_spawnedEnemies = 0;
 	}
 }

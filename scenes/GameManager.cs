@@ -3,23 +3,42 @@ using System;
 
 public partial class GameManager : Node
 {
+	private LevelBuilder _builder;
+
 	public override void _Ready()
 	{
 		GD.Print("GameLoader: initializing...");
 		EventManager.Subscribe("START_GAME", StartGame);
 	}
+
+	public override void _ExitTree()
+	{
+		EventManager.Unsubscribe("START_GAME", StartGame);
+	}
+
 	public void StartGame(object _)
 	{
 		GD.Print("GameManager: StartGame triggered!");
-		var builder = new LevelBuilder();
-		builder.StartBuilding();
-		AddChild(builder);
-		builder.BuildMap("Level1");
-		builder.BuildPlayer("Atlas");
-		builder.BuildEnemies(3);
-		builder.BuildUI();
-		var level = builder.GetResult();
+		_builder = new LevelBuilder();
+		_builder.StartBuilding();
+		AddChild(_builder);
+
+		_builder.BuildMap("Level1");
+		_builder.BuildPlayer("Atlas");
+		_builder.BuildEnemies(3);
+		_builder.BuildUI();
+
+		var level = _builder.GetResult();
+		if (level == null)
+		{
+			GD.PrintErr("[GameManager] LevelBuilder returned null level");
+			return;
+		}
+
 		AddChild(level);
 		level.Start();
+
+		_builder.QueueFree();
+		_builder = null;
 	}
 }

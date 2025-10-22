@@ -9,8 +9,10 @@ position = Vector2(-3, -6)
 script = ExtResource("1_iotdp")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 1920.0
-offset_bottom = 698.0
+offset_left = -760.0
+offset_top = -42.0
+offset_right = 1160.0
+offset_bottom = 656.0
 size_flags_vertical = 4
 texture = ExtResource("1_w77jt")
 

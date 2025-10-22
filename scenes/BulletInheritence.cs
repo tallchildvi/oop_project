@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 public partial class BulletInheritance : Area2D
 {
@@ -25,13 +26,26 @@ public partial class BulletInheritance : Area2D
 	{
 		movementLogic.Move(delta);
 	}
-
+	
 	public override void _Ready()
 	{
-		Connect("area_entered", new Callable(this, nameof(OnAreaEntered)));
+		base._Ready();
+		movementLogic = new BulletMovement(this, speed);
+		collisionHandler = new BulletCollisionHandler(this);
+		this.AreaEntered += OnAreaEntered;
 		if (!string.IsNullOrEmpty(selfGroup))
 			AddToGroup(selfGroup);
 	}
+
+	//public override void _Ready()
+	//{
+		//
+		//// Підключаємо сигнал area_entered без помилок
+		//this.AreaEntered += OnAreaEntered;
+		//if (!string.IsNullOrEmpty(selfGroup))
+			//AddToGroup(selfGroup);
+			//
+	//}
 
 	protected virtual void OnAreaEntered(Area2D area)
 	{
@@ -39,13 +53,14 @@ public partial class BulletInheritance : Area2D
 	}
 }
 
+// Movement logic
 public class BulletMovement
 {
-	private Area2D owner;
-	private Vector2 direction;
+	private Node2D owner;
+	private Vector2 direction = Vector2.Right;
 	private float speed;
 
-	public BulletMovement(Area2D owner, float speed)
+	public BulletMovement(Node2D owner, float speed)
 	{
 		this.owner = owner;
 		this.speed = speed;
@@ -53,9 +68,10 @@ public class BulletMovement
 
 	public void SetDirection(Vector2 dir, bool facingRight)
 	{
-		direction = dir.Normalized();
+		direction = dir;
 		if (direction == Vector2.Zero)
-			direction.X = facingRight ? 1 : -1;
+			direction = facingRight ? Vector2.Right : Vector2.Left;
+		direction = direction.Normalized();
 	}
 
 	public void Move(double delta)
@@ -76,57 +92,30 @@ public class BulletCollisionHandler
 
 	public void HandleCollision(Area2D area, string oppositeGroup)
 	{
-		//if (area is IDamageable target)
-		//{
-			//if (owner.IsInGroup("player_bullet") && area.IsInGroup("enemy"))
-			//{
-				//target.TakeDamage(1);
-				//owner.QueueFree();
-			//}
-			//else if (owner.IsInGroup("enemy_bullet") && area.IsInGroup("player"))
-			//{
-				//target.TakeDamage(1);
-				//owner.QueueFree();
-			//}
-		//}
-		// ----------------or---------------------
-		if (area.IsInGroup(oppositeGroup))
+		if (area == null || owner == null) return;
+
+		// Якщо куля ворога влучила в гравця
+		if (owner.IsInGroup("enemy_bullet") && area.IsInGroup("player"))
 		{
-			area.QueueFree();
-			owner.QueueFree();
-		}
-		else if (area.IsInGroup("player") && owner.IsInGroup("enemy_bullet"))
-		{
-			var player = area as BaseCharacter;
-			if (player != null)
+			if (area is BaseCharacter player)
 				player.TakeDamage(1);
-
 			owner.QueueFree();
+			return;
 		}
-		else if (area.IsInGroup("enemy") && owner.IsInGroup("player_bullet"))
+
+		// Якщо куля гравця влучила в ворога
+		if (owner.IsInGroup("player_bullet") && area.IsInGroup("enemy"))
 		{
-			var enemy = area as BaseEnemy;
-			if (enemy != null)
+			if (area is BaseEnemy enemy)
 				enemy.TakeDamage(1);
+			owner.QueueFree();
+			return;
+		}
 
+		// Інакше — якщо влучили в щось із oppositeGroup — видаляємо кулю
+		if (!string.IsNullOrEmpty(oppositeGroup) && area.IsInGroup(oppositeGroup))
+		{
 			owner.QueueFree();
 		}
-		//if (area.IsInGroup(oppositeGroup))
-		//{
-			//area.QueueFree();
-			//owner.QueueFree();
-		//}
-		//else if (area.IsInGroup("player") && owner.IsInGroup("enemy_bullet"))
-		//{
-			//var manager = area.GetParent<CharacterManager>();
-			//if (manager != null)
-				//manager.TakeDamage(1);
-			//owner.QueueFree();
-		//}
-		//else if (area.IsInGroup("enemy") && owner.IsInGroup("player_bullet"))
-		//{
-			//area.QueueFree();
-			//owner.QueueFree();
-		//}
 	}
 }

@@ -22,8 +22,17 @@ public partial class BaseMenu : Panel
 		style.CornerRadiusBottomLeft = 15;
 		style.CornerRadiusBottomRight = 15;
 		this.AddThemeStyleboxOverride("panel", style);
-		MenuManager.Instance.RegisterMenu(MenuName, this);
+		CallDeferred(nameof(RegisterWithMenuManager));
 	}
+	
+	private void RegisterWithMenuManager()
+	{
+		if (!string.IsNullOrEmpty(MenuName) && MenuManager.Instance != null)
+			MenuManager.Instance.RegisterMenu(MenuName, this);
+		else
+			GD.PrintErr($"[BaseMenu] Could not register menu '{MenuName}' — MenuManager.Instance is null or name empty.");
+	}
+	
 	public virtual void Open()
 	{
 		this.Visible = true;

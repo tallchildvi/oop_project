@@ -15,20 +15,6 @@ run/main_scene="uid://d0l7c1su2o5xm"
 config/features=PackedStringArray("4.5", "C#", "Mobile")
 config/icon="res://icon.svg"
 
-[autoload]
-
-EventManager="*res://Scenes/EventManager.cs"
-MenuManager="*res://Scenes/MenuManager.cs"
-LevelManager="*res://Scenes/LevelBuilder.cs"
-Level="*res://Levels/Level.cs"
-BaseMenu="*res://Scenes/BaseMenu.cs"
-EnemyPool="*res://Scenes/EnemyPool.cs"
-GameManager="*res://Scenes/GameManager.cs"
-MainMenu="*res://Scenes/MainMenu.cs"
-Player="*res://Scenes/BaseCharacter.cs"
-Enemy="*res://Scenes/Enemy.cs"
-SettingsMenu="*res://Scenes/SettingsMenu.cs"
-
 [dotnet]
 
 project/assembly_name="oop_project"

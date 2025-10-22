@@ -1,25 +1,20 @@
 using Godot;
 using System;
 
-public partial class StandartBullet : Sprite2D
+public partial class StandartBullet : BulletInheritance
 {
-	private Vector2 movement;
-	private float speed = 1000f;
-	
-	public void Init(Vector2 direction, bool facingRight)
+	public override void _Ready()
 	{
-		AddToGroup("player_bullet");
-		movement = direction.Normalized();
-		if (movement == Vector2.Zero){
-			if(facingRight) movement.X += 1;
-			else movement.X -= 1;
-		}
+		base._Ready();
+		selfGroup = "player_bullet";
+		oppositeGroup = "enemy";
+		speed = 1000f;
+		movementLogic = new BulletMovement(this, speed);
 	}
-	
-	public override void _Process(double delta)
+
+	public override void Init(Vector2 direction, bool facingRight)
 	{
-		Position += movement * speed * (float)delta;
-		float angle = Mathf.Atan2(movement.Y, movement.X);
-		RotationDegrees = Mathf.RadToDeg(angle);
+		base.Init(direction, facingRight);
+		AddToGroup("player_bullet");
 	}
 }

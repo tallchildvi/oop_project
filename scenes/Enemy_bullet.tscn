@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cqq562p2gkyxe"]
 
-[ext_resource type="Texture2D" uid="uid://bj8p2kghhi5no" path="res://enemies/textures/fireball.png" id="2_y8aaw"]
+[ext_resource type="Texture2D" uid="uid://c1ohdvata2rqk" path="res://icon.svg" id="2_y8aaw"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_p3c2h"]
 script/source = "using Godot;
