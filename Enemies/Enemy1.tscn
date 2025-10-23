@@ -19,20 +19,24 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i4tw4"]
-size = Vector2(11, 23)
+size = Vector2(35, 70.75)
 
 [node name="enemy1" type="Area2D"]
 script = ExtResource("1_t1fru")
+bulletSpawnInterval = null
+activationDistance = null
+MaxHealth = null
+Speed = null
 
 [node name="EnemySprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(1, 6)
-scale = Vector2(0.40399998, 0.40399998)
+position = Vector2(6.7880006, 9.050673)
+scale = Vector2(1.2171667, 1.2171671)
 sprite_frames = SubResource("SpriteFrames_07mnk")
 animation = &"idle"
 frame_progress = 0.7106263
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 6.5)
+position = Vector2(9, 9)
 shape = SubResource("RectangleShape2D_i4tw4")
 
 [node name="Weapon" type="AnimatedSprite2D" parent="."]

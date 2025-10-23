@@ -7,8 +7,11 @@ public partial class GameManager : Node
 
 	public override void _Ready()
 	{
-		GD.Print("GameLoader: initializing...");
+		GD.Print("[GameManager] initializing...");
+		GD.Print($"[GameManager] screen size: {DisplayServer.ScreenGetSize(DisplayServer.WindowGetCurrentScreen())}");
+		GD.Print($"[GameManager] window size: {DisplayServer.WindowGetSize()}");
 		EventManager.Subscribe("START_GAME", StartGame);
+		
 	}
 
 	public override void _ExitTree()
@@ -18,7 +21,7 @@ public partial class GameManager : Node
 
 	public void StartGame(object _)
 	{
-		GD.Print("GameManager: StartGame triggered!");
+		GD.Print("[GameManager] StartGame triggered!");
 		_builder = new LevelBuilder();
 		_builder.StartBuilding();
 		AddChild(_builder);

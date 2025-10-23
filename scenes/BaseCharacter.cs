@@ -449,11 +449,11 @@ public partial class BaseCharacter : Area2D
 				movement = movement.Normalized();
 				Position += movement * speed * (float)delta;
 				OnMove(movement);
-				GD.Print($"Speed: {speed}");
-				GD.Print($"Movement: {movement}");
-				GD.Print($"Position: {Position}");
-				GD.Print($"delta: {delta}");
-				GD.Print($"expected change of position: {movement * speed}");
+				//GD.Print($"Speed: {speed}");
+				//GD.Print($"Movement: {movement}");
+				//GD.Print($"Position: {Position}");
+				//GD.Print($"delta: {delta}");
+				//GD.Print($"expected change of position: {movement * speed}");
 			}
 			else
 			{

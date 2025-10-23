@@ -8,7 +8,7 @@ public partial class StandartBullet : BulletInheritance
 		base._Ready();
 		selfGroup = "player_bullet";
 		oppositeGroup = "enemy";
-		speed = 1000f;
+		speed = 2000f;
 		movementLogic = new BulletMovement(this, speed);
 	}
 

@@ -4,17 +4,17 @@
 [ext_resource type="Script" uid="uid://4fxb0vuyped2" path="res://Characters/Atlas/StandartBullet.cs" id="1_2ugkg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_au12s"]
-size = Vector2(104, 20)
+size = Vector2(50, 10)
 
 [node name="Standart_bullet" type="Area2D"]
 position = Vector2(-1, 0)
 script = ExtResource("1_2ugkg")
 
 [node name="bang" type="Sprite2D" parent="."]
-position = Vector2(1, 0)
-scale = Vector2(0.20114943, 0.2460318)
+position = Vector2(0.9999995, -1)
+scale = Vector2(0.09865901, 0.035714287)
 texture = ExtResource("1_2ommj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 0)
+position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_au12s")

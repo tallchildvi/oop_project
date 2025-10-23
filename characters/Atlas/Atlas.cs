@@ -311,8 +311,11 @@ public partial class Atlas : BaseCharacter
 		bulletSpawn = GetNodeOrNull<Marker2D>("Weapon2D/bullet_spawn");
 
 		if (characterSprite == null) GD.PrintErr("[Atlas] Missing Character2D");
+		else characterSprite.Scale *= (float)1.3;
 		if (weapon == null) GD.PrintErr("[Atlas] Missing Weapon2D");
+		else weapon.Scale *= (float)1.3;
 		if (bulletSpawn == null) GD.PrintErr("[Atlas] Missing Weapon2D/bullet_spawn");
+		
 
 		if (weapon != null) originalWeaponScale = weapon.Scale;
 		if (characterSprite != null) originalCharacterScale = characterSprite.Scale;

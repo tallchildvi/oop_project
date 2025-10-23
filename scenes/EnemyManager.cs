@@ -82,10 +82,12 @@ public partial class EnemyManager : Node
 
 	private Vector2 GetRandomSpawnPosition()
 	{
-		var displaySize = DisplayServer.ScreenGetSize(DisplayServer.WindowGetCurrentScreen());
+		var windowSize = DisplayServer.WindowGetSize();
 		var rand = new RandomNumberGenerator();
 		rand.Randomize();
-		return new Vector2(rand.RandfRange( 100, displaySize.X - 100), rand.RandfRange( 50, displaySize.Y));
+		var position = new Vector2(rand.RandfRange( 100, windowSize.X - 100), rand.RandfRange( 50, windowSize.Y));
+		GD.Print($"[EnemyManager] random position for enemy: {position}");
+		return position;
 	}
 
 	private void OnEnemyDied(BaseEnemy enemy)

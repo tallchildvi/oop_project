@@ -34,8 +34,6 @@ public partial class Jereb : BaseEnemy
 		_bulletTimer.Timeout += OnBulletTimerTimeout;
 		_bulletTimer.Stop(); // стартуємо лише коли гравець близько
 
-		// (дубльовано) — BaseEnemy._Ready вже додає в групу "enemy",
-		// але повторна додаткова реєстрація не шкодить
 		AddToGroup("enemy");
 	}
 
@@ -62,7 +60,6 @@ public partial class Jereb : BaseEnemy
 			{
 				_bulletTimer.WaitTime = bulletSpawnInterval;
 				_bulletTimer.Start();
-				// можеш запустити анімацію "alert" тут
 			}
 		}
 		else
@@ -71,7 +68,6 @@ public partial class Jereb : BaseEnemy
 				_bulletTimer.Stop();
 		}
 
-		// Оновлюємо напрямок спрайту відносно гравця
 		UpdateFacingTowardsPlayer();
 	}
 
