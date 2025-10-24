@@ -70,7 +70,7 @@ public partial class BaseEnemy : Area2D
 		ProcessMode = ProcessModeEnum.Inherit;
 
 		var collision = GetNodeOrNull<CollisionShape2D>("CollisionShape2D");
-		if (collision != null) collision.Disabled = false;
+		if (collision != null) collision.SetDeferred("disabled", false);;
 	}
 
 	public virtual void ResetState()
@@ -83,7 +83,7 @@ public partial class BaseEnemy : Area2D
 		ProcessMode = ProcessModeEnum.Inherit;
 
 		var collision = GetNodeOrNull<CollisionShape2D>("CollisionShape2D");
-		if (collision != null) collision.Disabled = false;
+		if (collision != null) collision.SetDeferred("disabled", false);
 	}
 
 	public virtual void Pause()

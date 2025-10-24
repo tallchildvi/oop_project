@@ -3,9 +3,9 @@ using System;
 
 public partial class Jereb : BaseEnemy
 {
-	[Export] private float bulletSpawnInterval = 3.0f;
-	[Export] private PackedScene bulletScene;
-	[Export] private float activationDistance = 400f;
+	private float bulletSpawnInterval = 3.0f;
+	private PackedScene bulletScene;
+	private float activationDistance = 400f;
 
 	private AnimatedSprite2D characterSprite;
 	private Timer _bulletTimer;
@@ -28,6 +28,9 @@ public partial class Jereb : BaseEnemy
 			OneShot = false,
 			WaitTime = bulletSpawnInterval
 		};
+		
+		GD.Print($"[Jereb] bulletSpawnInterval {bulletSpawnInterval}");
+		
 		AddChild(_bulletTimer);
 		_bulletTimer.Timeout += OnBulletTimerTimeout;
 		_bulletTimer.Stop(); 

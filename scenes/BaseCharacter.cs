@@ -4,11 +4,11 @@ using System;
 public partial class BaseCharacter : Area2D
 {
 	//protected float speed = 200f;
-	public float speed = 200f;
-	protected float dashSpeed = 400f;
-	protected float dashTime = 0.2f;
-	protected float dashReloadTime = 1f;
-	protected float bulletReloadTime = 0.4f;
+	public float speed;
+	protected float dashSpeed;
+	protected float dashTime;
+	protected float dashReloadTime;
+	protected float bulletReloadTime;
 	protected int maxHealth = 5;
 	protected int maxAmmo = 10;
 	protected int ammo = 0;
@@ -22,7 +22,7 @@ public partial class BaseCharacter : Area2D
 	protected bool facingRight = true;
 	protected int health;
 	protected bool control = true;
-	protected float chargeTime = 5f; 
+	protected float chargeTime; 
 	private bool isCharging = false;
 	private float chargeTimer;
 
@@ -40,13 +40,14 @@ public partial class BaseCharacter : Area2D
 		float set_dashReloadTime = 1f, float set_bulletReloadTime = 0.4f, int set_maxAmmo = 10, float set_chargeTime = 3f)
 	{
 		GD.Print("try to init character");
-		this.speed = set_speed;
-		this.dashSpeed = set_dashSpeed;
-		this.dashTime = set_dashTime;
-		this.dashReloadTime = set_dashReloadTime;
-		this.bulletReloadTime = set_bulletReloadTime;
-		this.maxAmmo = set_maxAmmo;
+		speed = set_speed;
+		dashSpeed = set_dashSpeed;
+		dashTime = set_dashTime;
+		dashReloadTime = set_dashReloadTime;
+		bulletReloadTime = set_bulletReloadTime;
+		maxAmmo = set_maxAmmo;
 		ammo = set_maxAmmo;
+		chargeTime = set_chargeTime;
 	}
 
 	public override void _Process(double delta)

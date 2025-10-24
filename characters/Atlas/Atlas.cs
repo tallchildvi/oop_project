@@ -13,7 +13,7 @@ public partial class Atlas : BaseCharacter
 	public override void _Ready()
 	{
 		base._Ready();
-		Init(250f, 500f, 1.5f, 1.2f, 0.15f, 12, 2);
+		Init(250f, 500f, 1.5f, 1.2f, 0.15f, 12, 2f);
 		characterSprite = GetNodeOrNull<AnimatedSprite2D>("Character2D");
 		weapon = GetNodeOrNull<AnimatedSprite2D>("Weapon2D");
 		bulletSpawn = GetNodeOrNull<Marker2D>("Weapon2D/bullet_spawn");
