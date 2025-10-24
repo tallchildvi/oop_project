@@ -94,7 +94,6 @@ public class BulletCollisionHandler
 	{
 		if (area == null || owner == null) return;
 
-		// Якщо куля ворога влучила в гравця
 		if (owner.IsInGroup("enemy_bullet") && area.IsInGroup("player"))
 		{
 			if (area is BaseCharacter player)
@@ -102,8 +101,7 @@ public class BulletCollisionHandler
 			owner.QueueFree();
 			return;
 		}
-
-		// Якщо куля гравця влучила в ворога
+		
 		if (owner.IsInGroup("player_bullet") && area.IsInGroup("enemy"))
 		{
 			if (area is BaseEnemy enemy)
@@ -112,7 +110,6 @@ public class BulletCollisionHandler
 			return;
 		}
 
-		// Інакше — якщо влучили в щось із oppositeGroup — видаляємо кулю
 		if (!string.IsNullOrEmpty(oppositeGroup) && area.IsInGroup(oppositeGroup))
 		{
 			owner.QueueFree();

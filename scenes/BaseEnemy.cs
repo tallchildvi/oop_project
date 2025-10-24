@@ -3,31 +3,32 @@ using System;
 
 public partial class BaseEnemy : Area2D
 {
-	[Export] public int MaxHealth = 100;
-	[Export] public float Speed = 100f;
-
+	public int maxHealth = 2;
+	public float speed = 100f;
 	protected int currentHealth;
 	protected bool isDead;
 	protected bool isPaused = false;
-
-	// напрямок, щоб ворог знав куди "дивитись"
-	protected bool FacingRight = true;
-
-	// посилання на гравця (може встановити EnemyManager або знайти у сцені)
+	protected bool facingRight = true;
 	public BaseCharacter Player { get; protected set; }
-
-	// Подія смерті — EnemyManager підписується на неї
 	public event Action<BaseEnemy> Died;
+	protected Vector2 movement = Vector2.Zero;
 
 	public override void _Ready()
 	{
-		currentHealth = MaxHealth;
+		currentHealth = maxHealth;
 		AddToGroup("enemy");
 		
 		Player = GetTree().GetFirstNodeInGroup("player") as BaseCharacter;
 		ProcessMode = ProcessModeEnum.Inherit;
 	}
-
+	
+	public override void _Process(double delta){
+		if (isPaused) return; 
+		if (Player == null) return;
+		movement = new Vector2(Player.GlobalPosition.X - Position.X, Player.GlobalPosition.Y - Position.Y);
+		movement = movement.Normalized();
+		Position += movement * speed * (float) delta;
+	}
 	public virtual void TakeDamage(int amount)
 	{
 		if (isDead) return;
@@ -59,28 +60,26 @@ public partial class BaseEnemy : Area2D
 		ProcessMode = ProcessModeEnum.Disabled;
 	}
 
-	// Викликає пул/менеджер, щоб активувати ворога (встановити позицію, включити колізії)
 	public virtual void Activate(Vector2 spawnPosition)
 	{
 		Position = spawnPosition;
 		Visible = true;
 		isDead = false;
-		currentHealth = MaxHealth;
-		FacingRight = true;
+		currentHealth = maxHealth;
+		facingRight = true;
 		ProcessMode = ProcessModeEnum.Inherit;
 
 		var collision = GetNodeOrNull<CollisionShape2D>("CollisionShape2D");
 		if (collision != null) collision.Disabled = false;
 	}
 
-	// Викликається коли ворога повертають в пул або треба скинути внутрішній стан
 	public virtual void ResetState()
 	{
-		currentHealth = MaxHealth;
+		currentHealth = maxHealth;
 		isDead = false;
 		isPaused = false;
 		Visible = true;
-		FacingRight = true;
+		facingRight = true;
 		ProcessMode = ProcessModeEnum.Inherit;
 
 		var collision = GetNodeOrNull<CollisionShape2D>("CollisionShape2D");

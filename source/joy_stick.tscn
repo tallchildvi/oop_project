@@ -8,11 +8,13 @@
 script = ExtResource("1_g5623")
 
 [node name="JSBase" type="Sprite2D" parent="."]
-position = Vector2(226, 422)
-scale = Vector2(1.5, 1.5)
+modulate = Color(1, 1, 1, 0.9019608)
+position = Vector2(193, 467)
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_xewsc")
 
 [node name="Stick" type="Sprite2D" parent="."]
-position = Vector2(236, 426)
-scale = Vector2(1.5, 1.5)
+modulate = Color(1, 1, 1, 0.9019608)
+position = Vector2(193, 467.99997)
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("3_hl0po")

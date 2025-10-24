@@ -20,11 +20,9 @@ public partial class Jereb : BaseEnemy
 		if (characterSprite == null)
 			GD.PrintErr("[Jereb] Missing AnimatedSprite2D 'EnemySprite' (optional, but recommended)");
 
-		// Ініціалізація допоміжників
 		_distanceChecker = new DistanceChecker(this, activationDistance);
 		_bulletSpawner = new BulletSpawner(this, bulletScene, "enemy_bullet");
 
-		// Timer для стрільби (вмикається/зупиняється в залежності від відстані)
 		_bulletTimer = new Timer
 		{
 			OneShot = false,
@@ -32,7 +30,7 @@ public partial class Jereb : BaseEnemy
 		};
 		AddChild(_bulletTimer);
 		_bulletTimer.Timeout += OnBulletTimerTimeout;
-		_bulletTimer.Stop(); // стартуємо лише коли гравець близько
+		_bulletTimer.Stop(); 
 
 		AddToGroup("enemy");
 	}
@@ -41,19 +39,15 @@ public partial class Jereb : BaseEnemy
 	{
 		base._Process(delta);
 
-		if (isDead) return; // не працюємо якщо померли
+		if (isDead) return; 
 
 		if (Player == null)
 		{
-			// Спробуємо знайти гравця (якщо ще не встановлено)
 			Player = GetTree().GetFirstNodeInGroup("player") as BaseCharacter;
 			if (Player == null) return;
 		}
-
-		// Перевірка дистанції викликається кожен кадр
 		_distanceChecker.CheckDistance(Player.GlobalPosition);
 
-		// Керуємо таймером в залежності від дистанції
 		if (_distanceChecker.IsActive)
 		{
 			if (_bulletTimer.IsStopped())
@@ -76,11 +70,10 @@ public partial class Jereb : BaseEnemy
 		if (Player == null || characterSprite == null) return;
 
 		bool shouldFaceRight = Player.GlobalPosition.X > GlobalPosition.X;
-		if (shouldFaceRight != FacingRight)
+		if (shouldFaceRight != facingRight)
 		{
-			FacingRight = shouldFaceRight;
-			// Якщо FacingRight == true -> FlipH = false (спрайт не фліпати)
-			characterSprite.FlipH = !FacingRight;
+			facingRight = shouldFaceRight;
+			characterSprite.FlipH = !facingRight;
 		}
 	}
 
@@ -94,11 +87,9 @@ public partial class Jereb : BaseEnemy
 			return;
 		}
 
-		// Виклик спавнера
-		_bulletSpawner.SpawnBullet(Player, FacingRight);
+		_bulletSpawner.SpawnBullet(Player, facingRight);
 	}
-
-	// Коли ворога повертають в пул, ResetState має відновити його і зупинити таймери
+	
 	public override void ResetState()
 	{
 		base.ResetState();
@@ -122,7 +113,7 @@ public partial class Jereb : BaseEnemy
 		if (_distanceChecker != null && _distanceChecker.IsActive && _bulletTimer != null)
 			_bulletTimer.Start();
 	}
-
+	
 	public override void _ExitTree()
 	{
 		if (_bulletTimer != null)
