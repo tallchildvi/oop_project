@@ -17,8 +17,11 @@ public partial class Jereb : BaseEnemy
 		base._Ready();
 
 		characterSprite = GetNodeOrNull<AnimatedSprite2D>("EnemySprite");
+		bulletScene = GD.Load<PackedScene>("res://Enemies/Enemy_bullet.tscn");
 		if (characterSprite == null)
-			GD.PrintErr("[Jereb] Missing AnimatedSprite2D 'EnemySprite' (optional, but recommended)");
+			GD.PrintErr("[Jereb] Missing AnimatedSprite2D 'EnemySprite')");
+		if (characterSprite == null)
+			GD.PrintErr("[Jereb] Missing PackedScene 'bulletScene'");
 
 		_distanceChecker = new DistanceChecker(this, activationDistance);
 		_bulletSpawner = new BulletSpawner(this, bulletScene, "enemy_bullet");
@@ -29,7 +32,7 @@ public partial class Jereb : BaseEnemy
 			WaitTime = bulletSpawnInterval
 		};
 		
-		GD.Print($"[Jereb] bulletSpawnInterval {bulletSpawnInterval}");
+		//GD.Print($"[Jereb] bulletSpawnInterval {bulletSpawnInterval}");
 		
 		AddChild(_bulletTimer);
 		_bulletTimer.Timeout += OnBulletTimerTimeout;

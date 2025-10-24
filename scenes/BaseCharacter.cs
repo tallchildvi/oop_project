@@ -173,11 +173,11 @@ public partial class BaseCharacter : Area2D
 	{
 		health -= damage;
 		if (health > 0)
-			GD.Print("[Player] take damage");
+			GD.Print("[BaseCharacter] take damage");
 		else
 		{
 			health = 0;
-			GD.Print("[Player] Died");
+			GD.Print("[BaseCharacter] Died");
 			EventManager.TriggerEvent("GAME_OVER", this);
 		}
 	}
