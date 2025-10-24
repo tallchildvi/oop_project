@@ -79,19 +79,55 @@ public partial class EnemyManager : Node
 		_spawnedEnemies++;
 	}
 
+	//private Vector2 GetRandomSpawnPosition()
+	//{
+		//var windowSize = DisplayServer.WindowGetSize();
+		//var rand = new RandomNumberGenerator();
+		//rand.Randomize();
+		//bool aboveScene = rand.Randf() < 0.5f;
+		//bool fromLeft = rand.Randf() < 0.5f;
+		//int randX = fromLeft ? (int)rand.RandfRange(-200, -100) : (int)rand.RandfRange(windowSize.X + 100, windowSize.X + 200);
+		//int randY = aboveScene ? (int)rand.RandfRange(-200, -100) : (int)rand.RandfRange(windowSize.Y + 100, windowSize.Y + 200);
+		//var position = new Vector2(randX, randY);
+		//GD.Print($"[EnemyManager] random position for enemy: {position}");
+		//return position;
+	//}
 	private Vector2 GetRandomSpawnPosition()
 	{
 		var windowSize = DisplayServer.WindowGetSize();
 		var rand = new RandomNumberGenerator();
 		rand.Randomize();
-		bool aboveScene = rand.Randf() < 0.5f;
-		bool fromLeft = rand.Randf() < 0.5f;
-		int randX = fromLeft ? (int)rand.RandfRange(-200, -100) : (int)rand.RandfRange(windowSize.X + 100, windowSize.X + 200);
-		int randY = aboveScene ? (int)rand.RandfRange(-200, -100) : (int)rand.RandfRange(windowSize.Y + 100, windowSize.Y + 200);
-		var position = new Vector2(randX, randY);
-		GD.Print($"[EnemyManager] random position for enemy: {position}");
-		return position;
+
+		int side = rand.RandiRange(0, 3);
+		Vector2 pos = Vector2.Zero;
+
+		switch (side)
+		{
+			case 0:
+				pos.X = rand.RandfRange(-100, windowSize.X + 100);
+				pos.Y = rand.RandfRange(-200, -100);
+				break;
+
+			case 1:
+				pos.X = rand.RandfRange(windowSize.X + 100, windowSize.X + 200);
+				pos.Y = rand.RandfRange(-100, windowSize.Y + 100);
+				break;
+
+			case 2:
+				pos.X = rand.RandfRange(-100, windowSize.X + 100);
+				pos.Y = rand.RandfRange(windowSize.Y + 100, windowSize.Y + 200);
+				break;
+
+			case 3:
+				pos.X = rand.RandfRange(-200, -100);
+				pos.Y = rand.RandfRange(-100, windowSize.Y + 100);
+				break;
+		}
+
+		GD.Print($"[EnemyManager] Spawn position for enemy: {pos}");
+		return pos;
 	}
+
 
 	private void OnEnemyDied(BaseEnemy enemy)
 	{
