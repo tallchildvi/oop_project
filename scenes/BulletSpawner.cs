@@ -21,7 +21,6 @@ public class BulletSpawner
 		var node = bulletScene.Instantiate();
 		if (node == null) return;
 
-		// Якщо це BulletInheritance — ініціалізуємо коректно
 		if (node is BulletInheritance bullet)
 		{
 			bullet.GlobalPosition = owner.GlobalPosition;
@@ -35,8 +34,7 @@ public class BulletSpawner
 
 			if (!string.IsNullOrEmpty(bulletGroup))
 				bullet.AddToGroup(bulletGroup);
-
-			// додаємо у кореневу сцену, щоб кулі були в правильному місці
+				
 			var root = owner.GetTree().CurrentScene;
 			if (root != null)
 				root.AddChild(bullet);
@@ -45,7 +43,6 @@ public class BulletSpawner
 			return;
 		}
 
-		// Якщо prefab не підписано на BulletInheritance — просто додаємо і попереджаємо
 		var rootFallback = owner.GetTree().CurrentScene;
 		if (rootFallback != null)
 			rootFallback.AddChild(node);

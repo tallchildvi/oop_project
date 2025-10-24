@@ -68,14 +68,13 @@ public partial class EnemyPool : Node
 
 		if (enemy == null) return null;
 
-		enemy.Activate(Vector2.Zero); // позицію встановить той, хто викликав
+		enemy.Activate(Vector2.Zero);
 		return enemy;
 	}
 
 	public void ReturnEnemy(BaseEnemy enemy)
 	{
 		if (enemy == null || !IsInstanceValid(enemy)) return;
-		// Деактивуємо ворога і повертаємо в пул
 		enemy.ResetState();
 		enemy.Visible = false;
 		_pool.Enqueue(enemy);

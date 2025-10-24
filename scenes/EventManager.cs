@@ -14,7 +14,6 @@ public partial class EventManager : Control
 
 	public override void _ExitTree()
 	{
-		// Не очищаємо глобально весь словник тут — інші системи можуть чекати подій.
 		Instance = null;
 	}
 
@@ -48,7 +47,6 @@ public partial class EventManager : Control
 		var del = eventDictionary[eventName];
 		if (del == null) return;
 
-		// Безпечний виклик — щоб помилка одного підписника не перервала всіх
 		foreach (Action<object> single in del.GetInvocationList())
 		{
 			try

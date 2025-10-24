@@ -41,11 +41,9 @@ public partial class SettingsMenu : BaseMenu
 		_musicSlider.AddThemeStyleboxOverride("grabber", grabberStyle);
 		_musicSlider.AddThemeConstantOverride("grabber_offset", 0);
 
-		// Початкове значення
 		_musicSlider.Value = 100;
 		_languageSelector.Selected = 0;
 
-		// Сигнали
 		_musicSlider.ValueChanged += OnMusicVolumeChanged;
 		_languageSelector.ItemSelected += OnLanguageSelected;
 		_backBtn.Pressed += () => EventManager.TriggerEvent("CLOSE_MENU", "SettingsMenu");

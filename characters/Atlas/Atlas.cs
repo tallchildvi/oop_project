@@ -13,7 +13,7 @@ public partial class Atlas : BaseCharacter
 	public override void _Ready()
 	{
 		base._Ready();
-		Init(250f, 500f, 0.25f, 1.2f, 0.35f, 12);
+		Init(250f, 500f, 1.5f, 1.2f, 0.15f, 12, 2);
 		characterSprite = GetNodeOrNull<AnimatedSprite2D>("Character2D");
 		weapon = GetNodeOrNull<AnimatedSprite2D>("Weapon2D");
 		bulletSpawn = GetNodeOrNull<Marker2D>("Weapon2D/bullet_spawn");
@@ -67,7 +67,6 @@ public partial class Atlas : BaseCharacter
 		return true;
 	}
 
-	// Візуальна частина (hooks)
 	protected override void OnMove(Vector2 dir)
 	{
 		characterSprite?.Play("run");

@@ -60,7 +60,6 @@ public partial class Level : Node
 
 	private void OnEnemyKilled(object enemy)
 	{
-		// EnemyManager сам повертає ворога в пул; тут ми можемо оновлювати UI тощо.
 		if (UI != null)
 		{
 			// UI.OnEnemyKilled(...);

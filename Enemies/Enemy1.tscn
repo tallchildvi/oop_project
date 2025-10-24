@@ -25,8 +25,6 @@ size = Vector2(35, 70.75)
 script = ExtResource("1_t1fru")
 bulletSpawnInterval = null
 activationDistance = null
-MaxHealth = null
-Speed = null
 
 [node name="EnemySprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(6.7880006, 9.050673)

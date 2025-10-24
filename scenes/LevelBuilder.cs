@@ -37,6 +37,7 @@ public partial class LevelBuilder : Node, ILevelBuilder
 		if (player == null) GD.Print("player is null");
 		else GD.Print("player has found");
 		_currentLevel.Player = player;
+		_currentLevel.Player.Position =  new Vector2(DisplayServer.WindowGetSize().X/2, DisplayServer.WindowGetSize().Y/2);
 		GD.Print($"{_currentLevel.Player.speed}");
 		_currentLevel.AddChild(player);
 

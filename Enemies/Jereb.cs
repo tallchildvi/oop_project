@@ -79,7 +79,6 @@ public partial class Jereb : BaseEnemy
 
 	private void OnBulletTimerTimeout()
 	{
-		// перевірки
 		if (Player == null) return;
 		if (bulletScene == null)
 		{

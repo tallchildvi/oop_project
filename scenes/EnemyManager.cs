@@ -70,10 +70,9 @@ public partial class EnemyManager : Node
 			return;
 		}
 
-		// Встановлюємо позицію до активації, або після отримання: тут генеруємо випадкову позицію
 		enemy.Position = GetRandomSpawnPosition();
 		enemy.Visible = true;
-		enemy.ResetState(); // переконаємось, що стани скинуті
+		enemy.ResetState();
 		_activeEnemies.Add(enemy);
 		enemy.Died += OnEnemyDied;
 
@@ -85,7 +84,11 @@ public partial class EnemyManager : Node
 		var windowSize = DisplayServer.WindowGetSize();
 		var rand = new RandomNumberGenerator();
 		rand.Randomize();
-		var position = new Vector2(rand.RandfRange( 100, windowSize.X - 100), rand.RandfRange( 50, windowSize.Y));
+		bool aboveScene = rand.Randf() < 0.5f;
+		bool fromLeft = rand.Randf() < 0.5f;
+		int randX = fromLeft ? (int)rand.RandfRange(-200, -100) : (int)rand.RandfRange(windowSize.X + 100, windowSize.X + 200);
+		int randY = aboveScene ? (int)rand.RandfRange(-200, -100) : (int)rand.RandfRange(windowSize.Y + 100, windowSize.Y + 200);
+		var position = new Vector2(randX, randY);
 		GD.Print($"[EnemyManager] random position for enemy: {position}");
 		return position;
 	}

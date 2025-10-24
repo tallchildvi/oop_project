@@ -10,7 +10,6 @@ public partial class MenuManager : Node
 	public override void _Ready()
 	{
 		Instance = this;
-		// підписуємо менеджер меню на розсилку
 		EventManager.Subscribe("OPEN_MENU", OnOpenMenu);
 		EventManager.Subscribe("CLOSE_MENU", OnCloseMenu);
 		EventManager.Subscribe("TOGGLE_MENU", OnToggleMenu);

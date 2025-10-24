@@ -40,7 +40,6 @@ public partial class BulletInheritance : Area2D
 	//public override void _Ready()
 	//{
 		//
-		//// Підключаємо сигнал area_entered без помилок
 		//this.AreaEntered += OnAreaEntered;
 		//if (!string.IsNullOrEmpty(selfGroup))
 			//AddToGroup(selfGroup);

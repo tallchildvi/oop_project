@@ -36,17 +36,17 @@ public partial class BaseCharacter : Area2D
 		ammo = maxAmmo;
 	}
 
-	public void Init(float speed = 200f, float dashSpeed = 400f, float dashTime = 0.2f, 
-		float dashReloadTime = 1f, float bulletReloadTime = 0.4f, int maxAmmo = 10)
+	public void Init(float set_speed = 200f, float set_dashSpeed = 400f, float set_dashTime = 0.2f, 
+		float set_dashReloadTime = 1f, float set_bulletReloadTime = 0.4f, int set_maxAmmo = 10, float set_chargeTime = 3f)
 	{
 		GD.Print("try to init character");
-		this.speed = speed;
-		this.dashSpeed = dashSpeed;
-		this.dashTime = dashTime;
-		this.dashReloadTime = dashReloadTime;
-		this.bulletReloadTime = bulletReloadTime;
-		this.maxAmmo = maxAmmo;
-		ammo = maxAmmo;
+		this.speed = set_speed;
+		this.dashSpeed = set_dashSpeed;
+		this.dashTime = set_dashTime;
+		this.dashReloadTime = set_dashReloadTime;
+		this.bulletReloadTime = set_bulletReloadTime;
+		this.maxAmmo = set_maxAmmo;
+		ammo = set_maxAmmo;
 	}
 
 	public override void _Process(double delta)
@@ -62,6 +62,7 @@ public partial class BaseCharacter : Area2D
 		{
 			isCharging = false;
 			SetAmmo(maxAmmo);
+			GD.Print($"weapon is charged to {ammo}");
 		}
 		if (inDash)
 		{
