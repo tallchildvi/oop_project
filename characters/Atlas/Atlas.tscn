@@ -122,6 +122,7 @@ dashTime = null
 dashReloadTime = null
 bulletReloadTime = null
 maxHealth = null
+maxAmmo = null
 
 [node name="Character2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-2, 1)

@@ -71,7 +71,19 @@ public partial class Atlas : BaseCharacter
 	protected override void OnMove(Vector2 dir)
 	{
 		characterSprite?.Play("run");
-
+		
+		if (dir.X < 0 && facingRight)
+		{
+			facingRight = false;
+			if (characterSprite != null) characterSprite.FlipH = true;
+			if (weapon != null) weapon.Scale = new Vector2(-Mathf.Abs(originalWeaponScale.X), Mathf.Abs(originalWeaponScale.Y));
+		}
+		else if (dir.X > 0 && !facingRight)
+		{
+			facingRight = true;
+			if (characterSprite != null) characterSprite.FlipH = false;
+			if (weapon != null) weapon.Scale = new Vector2(Mathf.Abs(originalWeaponScale.X), Mathf.Abs(originalWeaponScale.Y));
+		}
 		// Поворот зброї
 		if (weapon != null)
 		{
@@ -82,29 +94,19 @@ public partial class Atlas : BaseCharacter
 				if (!facingRight) deg += 180f;
 				weapon.RotationDegrees = deg;
 			}
-			else
-			{
-				weapon.RotationDegrees = facingRight ? 0 : 180;
-			}
 		}
-		if (dir.X < 0 && facingRight)
-		{
-			facingRight = false;
-			if (characterSprite != null) characterSprite.FlipH = true;
-			if (weapon != null) weapon.Scale = new Vector2(Mathf.Abs(originalWeaponScale.X), -Mathf.Abs(originalWeaponScale.Y));
-		}
-		else if (dir.X > 0 && !facingRight)
-		{
-			facingRight = true;
-			if (characterSprite != null) characterSprite.FlipH = false;
-			if (weapon != null) weapon.Scale = new Vector2(Mathf.Abs(originalWeaponScale.X), Mathf.Abs(originalWeaponScale.Y));
-		}
+
 	}
 
 	protected override void OnIdle()
 	{
 		characterSprite?.Play("idle");
-		if (weapon != null) weapon.RotationDegrees = facingRight ? 0 : 180;
+		if (weapon != null)
+		{
+			weapon.RotationDegrees = 0;
+			weapon.Scale = facingRight ? new Vector2(Mathf.Abs(originalWeaponScale.X), Mathf.Abs(originalWeaponScale.Y)) 
+				: new Vector2(-Mathf.Abs(originalWeaponScale.X), Mathf.Abs(originalWeaponScale.Y));
+		}
 	}
 
 	protected override void OnDashStart()
