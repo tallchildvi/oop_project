@@ -91,7 +91,6 @@ public partial class Jereb : BaseEnemy
 			GD.PrintErr("[Jereb] bulletScene is null — set PackedScene in inspector");
 			return;
 		}
-
 		_bulletSpawner.SpawnBullet(Player, facingRight);
 	}
 	

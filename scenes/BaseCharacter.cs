@@ -3,7 +3,6 @@ using System;
 
 public partial class BaseCharacter : Area2D
 {
-	//protected float speed = 200f;
 	public float speed;
 	protected float dashSpeed;
 	protected float dashTime;

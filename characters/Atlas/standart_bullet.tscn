@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://6tqy1yxl18iv"]
 
-[ext_resource type="Texture2D" uid="uid://bjnrtqxfrycbu" path="res://Characters/Atlas/textures/bang.jpg" id="1_2ommj"]
 [ext_resource type="Script" uid="uid://4fxb0vuyped2" path="res://Characters/Atlas/StandartBullet.cs" id="1_2ugkg"]
+[ext_resource type="Texture2D" uid="uid://bp7lbhfm348r" path="res://Characters/Atlas/textures/image.png" id="2_au12s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_au12s"]
 size = Vector2(50, 10)
@@ -11,9 +11,10 @@ position = Vector2(-1, 0)
 script = ExtResource("1_2ugkg")
 
 [node name="bang" type="Sprite2D" parent="."]
-position = Vector2(0.9999995, -1)
-scale = Vector2(0.09865901, 0.035714287)
-texture = ExtResource("1_2ommj")
+position = Vector2(-35.000004, -0.7530687)
+rotation = 1.5707964
+scale = Vector2(0.17241609, 0.24177967)
+texture = ExtResource("2_au12s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -1)
