@@ -4,7 +4,7 @@ using System;
 public partial class BaseEnemy : Area2D
 {
 	public int maxHealth = 2;
-	public float speed = 100f;
+	public float speed = 50f;
 	protected int currentHealth;
 	protected bool isDead;
 	protected bool isPaused = false;

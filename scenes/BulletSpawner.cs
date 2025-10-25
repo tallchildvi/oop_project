@@ -28,13 +28,16 @@ public class BulletSpawner
 			if (player != null)
 				direction = (player.GlobalPosition - owner.GlobalPosition).Normalized();
 			else
+			{
+				GD.Print("[BulletSpawner] player is null");
 				direction = facingRight ? Vector2.Right : Vector2.Left;
+			}
+			GD.Print($"[BulletSpawner] direction: {direction}");
 
 			bullet.Init(direction, facingRight);
 
 			if (!string.IsNullOrEmpty(bulletGroup))
 				bullet.AddToGroup(bulletGroup);
-				
 			var root = owner.GetTree().CurrentScene;
 			if (root != null)
 				root.AddChild(bullet);

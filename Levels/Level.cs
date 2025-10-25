@@ -11,9 +11,9 @@ public partial class Level : Node
 	private bool _isActive = false;
 
 	private int _currentWave = 0;
-	private int _maxWaves = 5;
-	private int _baseEnemies = 3;
-	private float _difficultyMultiplier = 1.25f;
+	private int _maxWaves;
+	private int _baseEnemies;
+	private float _difficultyMultiplier;
 
 	public override void _Ready()
 	{
@@ -22,6 +22,13 @@ public partial class Level : Node
 		EventManager.Subscribe("ENEMY_KILLED", OnEnemyKilled);
 		EventManager.Subscribe("GAME_OVER", OnPlayerDied);
 		EventManager.Subscribe("WAVE_CLEARED", OnWaveCleared);
+	}
+	
+	public void Init(int maxWaves = 5, int baseEnemies = 2, float difficulty = 1.1f)
+	{
+		_maxWaves = maxWaves;
+		_baseEnemies = baseEnemies;
+		_difficultyMultiplier = difficulty;
 	}
 
 	public void Start()

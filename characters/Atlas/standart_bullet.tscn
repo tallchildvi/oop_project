@@ -4,18 +4,18 @@
 [ext_resource type="Texture2D" uid="uid://bp7lbhfm348r" path="res://Characters/Atlas/textures/image.png" id="2_au12s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_au12s"]
-size = Vector2(50, 10)
+size = Vector2(28, 6)
 
 [node name="Standart_bullet" type="Area2D"]
 position = Vector2(-1, 0)
 script = ExtResource("1_2ugkg")
 
 [node name="bang" type="Sprite2D" parent="."]
-position = Vector2(-35.000004, -0.7530687)
+position = Vector2(-25.000002, 5.9604645e-08)
 rotation = 1.5707964
-scale = Vector2(0.17241609, 0.24177967)
+scale = Vector2(0.101793095, 0.16599062)
 texture = ExtResource("2_au12s")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1)
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_au12s")

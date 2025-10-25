@@ -14,6 +14,7 @@ public partial class LevelBuilder : Node, ILevelBuilder
 	{
 		var levelScene = GD.Load<PackedScene>("res://Levels/Level1.tscn");
 		_currentLevel = levelScene.Instantiate<Level>();
+		_currentLevel.Init(2, 1, 1.25f);
 	}
 
 	public void CancelBuildingLevel(object _) => _currentLevel = null;
@@ -43,12 +44,12 @@ public partial class LevelBuilder : Node, ILevelBuilder
 
 	}
 
-	public void BuildEnemies(int baseDifficulty = 1)
+	public void BuildEnemies()
 	{
 		var enemyScene = GD.Load<PackedScene>("res://Enemies/Enemy1.tscn");
 
 		var enemyPool = new EnemyPool();
-		enemyPool.Initialize(enemyScene, _currentLevel, baseDifficulty * 3);
+		enemyPool.Initialize(enemyScene, _currentLevel);
 
 		var enemyManager = new EnemyManager();
 		enemyManager.Initialize(enemyPool);
@@ -58,6 +59,7 @@ public partial class LevelBuilder : Node, ILevelBuilder
 
 		_currentLevel.EnemyPool = enemyPool;
 		_currentLevel.EnemyManager = enemyManager;
+		_currentLevel.EnemyManager.Clear();
 	}
 
 	public void BuildUI()

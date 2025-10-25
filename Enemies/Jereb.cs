@@ -20,7 +20,7 @@ public partial class Jereb : BaseEnemy
 		bulletScene = GD.Load<PackedScene>("res://Enemies/Enemy_bullet.tscn");
 		if (characterSprite == null)
 			GD.PrintErr("[Jereb] Missing AnimatedSprite2D 'EnemySprite')");
-		if (characterSprite == null)
+		if (bulletScene == null)
 			GD.PrintErr("[Jereb] Missing PackedScene 'bulletScene'");
 
 		_distanceChecker = new DistanceChecker(this, activationDistance);

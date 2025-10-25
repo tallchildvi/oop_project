@@ -9,7 +9,6 @@ public partial class StandartBullet : BulletInheritance
 		selfGroup = "player_bullet";
 		oppositeGroup = "enemy";
 		speed = 2000f;
-		movementLogic = new BulletMovement(this, speed);
 	}
 
 	public override void Init(Vector2 direction, bool facingRight)

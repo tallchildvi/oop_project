@@ -6,18 +6,20 @@ public partial class BulletInheritance : Area2D
 	protected BulletMovement movementLogic;
 	protected BulletCollisionHandler collisionHandler;
 	protected bool facingRight;
-	protected float speed = 400f;
+	protected float speed = 1000f;
 	protected string selfGroup = "";
 	protected string oppositeGroup = "";
 
 	public BulletInheritance()
 	{
-		movementLogic = new BulletMovement(this, speed);
-		collisionHandler = new BulletCollisionHandler(this);
+		//movementLogic = new BulletMovement(this, speed);
+		//collisionHandler = new BulletCollisionHandler(this);
 	}
 
 	public virtual void Init(Vector2 direction, bool facingRight)
 	{
+		movementLogic = new BulletMovement(this, speed);
+		collisionHandler = new BulletCollisionHandler(this);
 		this.facingRight = facingRight;
 		movementLogic.SetDirection(direction, facingRight);
 	}
@@ -30,8 +32,6 @@ public partial class BulletInheritance : Area2D
 	public override void _Ready()
 	{
 		base._Ready();
-		movementLogic = new BulletMovement(this, speed);
-		collisionHandler = new BulletCollisionHandler(this);
 		this.AreaEntered += OnAreaEntered;
 		if (!string.IsNullOrEmpty(selfGroup))
 			AddToGroup(selfGroup);
@@ -55,9 +55,9 @@ public partial class BulletInheritance : Area2D
 // Movement logic
 public class BulletMovement
 {
-	private Node2D owner;
-	private Vector2 direction = Vector2.Right;
-	private float speed;
+	protected Node2D owner;
+	public Vector2 direction = Vector2.Right;
+	protected float speed;
 
 	public BulletMovement(Node2D owner, float speed)
 	{
@@ -67,6 +67,7 @@ public class BulletMovement
 
 	public void SetDirection(Vector2 dir, bool facingRight)
 	{
+		GD.Print($"[BulletInheritence] set direction for bullet {dir}");
 		direction = dir;
 		if (direction == Vector2.Zero)
 			direction = facingRight ? Vector2.Right : Vector2.Left;

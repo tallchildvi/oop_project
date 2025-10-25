@@ -6,7 +6,7 @@ public partial class EnemyPool : Node
 	private PackedScene _enemyScene;
 	private Queue<BaseEnemy> _pool = new Queue<BaseEnemy>();
 	private int _initialSize = 10;
-	private Node _spawnParent; // де утримуємо ворогів (Level)
+	private Node _spawnParent; 
 
 	public void Initialize(PackedScene enemyScene, Node spawnParent, int initialSize = 10)
 	{
