@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Jereb : BaseEnemy
+public partial class Alien : BaseEnemy
 {
 	private float bulletSpawnInterval = 3.0f;
 	private PackedScene bulletScene;
@@ -19,9 +19,9 @@ public partial class Jereb : BaseEnemy
 		characterSprite = GetNodeOrNull<AnimatedSprite2D>("EnemySprite");
 		bulletScene = GD.Load<PackedScene>("res://Enemies/Enemy_bullet.tscn");
 		if (characterSprite == null)
-			GD.PrintErr("[Jereb] Missing AnimatedSprite2D 'EnemySprite')");
+			GD.PrintErr("[Alien] Missing AnimatedSprite2D 'EnemySprite')");
 		if (bulletScene == null)
-			GD.PrintErr("[Jereb] Missing PackedScene 'bulletScene'");
+			GD.PrintErr("[Alien] Missing PackedScene 'bulletScene'");
 
 		_distanceChecker = new DistanceChecker(this, activationDistance);
 		_bulletSpawner = new BulletSpawner(this, bulletScene, "enemy_bullet");
@@ -32,7 +32,7 @@ public partial class Jereb : BaseEnemy
 			WaitTime = bulletSpawnInterval
 		};
 		
-		//GD.Print($"[Jereb] bulletSpawnInterval {bulletSpawnInterval}");
+		//GD.Print($"[Alien] bulletSpawnInterval {bulletSpawnInterval}");
 		
 		AddChild(_bulletTimer);
 		_bulletTimer.Timeout += OnBulletTimerTimeout;
@@ -88,7 +88,7 @@ public partial class Jereb : BaseEnemy
 		if (Player == null) return;
 		if (bulletScene == null)
 		{
-			GD.PrintErr("[Jereb] bulletScene is null — set PackedScene in inspector");
+			GD.PrintErr("[Alien] bulletScene is null — set PackedScene in inspector");
 			return;
 		}
 		_bulletSpawner.SpawnBullet(Player, facingRight);

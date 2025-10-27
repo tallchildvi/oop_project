@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://ct1gyun7pmurc" path="res://Scenes/MenuManager.cs" id="5_8ln24"]
 [ext_resource type="Script" uid="uid://b2sp7ux6lbe18" path="res://Scenes/BaseMenu.cs" id="6_rtw2f"]
 [ext_resource type="Script" uid="uid://5fdxwb6ocmnf" path="res://Scenes/GameManager.cs" id="7_cp0ys"]
-[ext_resource type="Script" uid="uid://d14rl5f0j54uk" path="res://Scenes/LevelBuilder.cs" id="8_yhxw7"]
+[ext_resource type="Script" uid="uid://d14rl5f0j54uk" path="res://Scenes/Levels/LevelBuilder.cs" id="8_yhxw7"]
 
 [sub_resource type="SystemFont" id="SystemFont_wu84c"]
 font_names = PackedStringArray("Impact")

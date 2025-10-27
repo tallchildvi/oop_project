@@ -12,7 +12,7 @@ public partial class LevelBuilder : Node, ILevelBuilder
 
 	public void StartBuilding()
 	{
-		var levelScene = GD.Load<PackedScene>("res://Levels/Level1.tscn");
+		var levelScene = GD.Load<PackedScene>("res://Scenes/Levels/Level1.tscn");
 		_currentLevel = levelScene.Instantiate<Level>();
 		_currentLevel.Init(2, 1, 1.25f);
 	}
@@ -21,7 +21,7 @@ public partial class LevelBuilder : Node, ILevelBuilder
 
 	public void BuildMap(string mapName)
 	{
-		var scenePath = $"res://Levels/{mapName}.tscn";
+		var scenePath = $"res://Scenes/Levels/{mapName}.tscn";
 		var mapScene = GD.Load<PackedScene>(scenePath);
 		var mapInstance = mapScene.Instantiate<Node>();
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://coxglqhxehbe3"]
 
-[ext_resource type="Script" uid="uid://b6ece1la2cmkl" path="res://Enemies/Jereb.cs" id="1_t1fru"]
+[ext_resource type="Script" uid="uid://b6ece1la2cmkl" path="res://Enemies/Alien.cs" id="1_t1fru"]
 [ext_resource type="Texture2D" uid="uid://ywuai2ekv0h0" path="res://Enemies/enemy_1.png" id="2_jgmyh"]
 [ext_resource type="Texture2D" uid="uid://byimn71bywvs6" path="res://Enemies/enemy_1(1).png" id="3_se8eh"]
 
