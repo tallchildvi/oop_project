@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfhg86e8plcwb"]
+
+[ext_resource type="Script" uid="uid://dbdbh8fpuce83" path="res://ReloadBox.cs" id="1_85hwo"]
+[ext_resource type="Texture2D" uid="uid://b0irrqkyfvsfa" path="res://characters/Atlas/textures/banana_box_30_500x500_.png" id="2_2kwqi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5bwcp"]
+size = Vector2(55, 45)
+
+[node name="reload_box" type="Area2D"]
+script = ExtResource("1_85hwo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3.5, 0.5)
+shape = SubResource("RectangleShape2D_5bwcp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-4.000002, 3)
+scale = Vector2(0.11166667, 0.09916666)
+texture = ExtResource("2_2kwqi")

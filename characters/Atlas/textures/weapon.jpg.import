@@ -2,16 +2,35 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<< HEAD
 uid="uid://ucstwwevgw5g"
 path="res://.godot/imported/weapon.jpg-e20535488731a3aad00e6341375c5e6b.ctex"
+=======
+uid="uid://dsyabiaj0kv43"
+<<<<<<<< HEAD:characters/textures/weapon.jpg.import
+path="res://.godot/imported/weapon.jpg-9e8b0232bba619a24183d272ff101ca0.ctex"
+========
+path="res://.godot/imported/weapon.jpg-8a2af684620baf636e9f8cf57b8e1808.ctex"
+>>>>>>>> main:characters/Atlas/textures/weapon.jpg.import
+>>>>>>> main
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
+<<<<<<< HEAD
 source_file="res://Characters/Atlas/textures/weapon.jpg"
 dest_files=["res://.godot/imported/weapon.jpg-e20535488731a3aad00e6341375c5e6b.ctex"]
+=======
+<<<<<<<< HEAD:characters/textures/weapon.jpg.import
+source_file="res://Characters/textures/weapon.jpg"
+dest_files=["res://.godot/imported/weapon.jpg-9e8b0232bba619a24183d272ff101ca0.ctex"]
+========
+source_file="res://characters/Atlas/textures/weapon.jpg"
+dest_files=["res://.godot/imported/weapon.jpg-8a2af684620baf636e9f8cf57b8e1808.ctex"]
+>>>>>>>> main:characters/Atlas/textures/weapon.jpg.import
+>>>>>>> main
 
 [params]
 

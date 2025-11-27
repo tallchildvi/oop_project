@@ -1,10 +1,14 @@
 using Godot;
+<<<<<<< HEAD
 using System;
+=======
+>>>>>>> main
 
 public partial class StandartBullet : BulletInheritance
 {
 	public override void _Ready()
 	{
+<<<<<<< HEAD
 		base._Ready();
 		selfGroup = "player_bullet";
 		oppositeGroup = "enemy";
@@ -15,5 +19,11 @@ public partial class StandartBullet : BulletInheritance
 	{
 		base.Init(direction, facingRight);
 		AddToGroup("player_bullet");
+=======
+		selfGroup = "player_bullet";
+		oppositeGroup = "enemy_bullet";
+		speed = 400f;
+		base._Ready();
+>>>>>>> main
 	}
 }

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsyabiaj0kv43"
-path="res://.godot/imported/weapon.jpg-9e8b0232bba619a24183d272ff101ca0.ctex"
+uid="uid://bj8p2kghhi5no"
+path="res://.godot/imported/fireball.png-e2fee796b84287219cb8bbfffbe17572.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/textures/weapon.jpg"
-dest_files=["res://.godot/imported/weapon.jpg-9e8b0232bba619a24183d272ff101ca0.ctex"]
+source_file="res://Enemies/textures/fireball.png"
+dest_files=["res://.godot/imported/fireball.png-e2fee796b84287219cb8bbfffbe17572.ctex"]
 
 [params]
 

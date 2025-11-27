@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://6jjq6x7deak0"]
+
+[ext_resource type="Script" uid="uid://bsar6c4q7f6lg" path="res://enemies/jereb/EnemyBullet.cs" id="1_6na0x"]
+[ext_resource type="Texture2D" uid="uid://bj8p2kghhi5no" path="res://enemies/textures/fireball.png" id="2_7aax6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_16443"]
+radius = 44.407207
+
+[node name="EnemyBullet" type="Area2D"]
+script = ExtResource("1_6na0x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, 1.9999695)
+scale = Vector2(0.15430015, 0.15430017)
+texture = ExtResource("2_7aax6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(5, 0)
+shape = SubResource("CircleShape2D_16443")

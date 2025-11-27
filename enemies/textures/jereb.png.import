@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iftylqwtsqps"
-path="res://.godot/imported/character.jpg-ec4f46f0373e1a127ff16560a2fbf536.ctex"
+uid="uid://dmmaifcnes50v"
+path="res://.godot/imported/jereb.png-e1317693863faee0f0cc1ede023ff6c9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Characters/textures/character.jpg"
-dest_files=["res://.godot/imported/character.jpg-ec4f46f0373e1a127ff16560a2fbf536.ctex"]
+source_file="res://Enemies/textures/jereb.png"
+dest_files=["res://.godot/imported/jereb.png-e1317693863faee0f0cc1ede023ff6c9.ctex"]
 
 [params]
 

@@ -1,5 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://6tqy1yxl18iv"]
 
+<<<<<<< HEAD
 [ext_resource type="Script" uid="uid://4fxb0vuyped2" path="res://Characters/Atlas/StandartBullet.cs" id="1_2ugkg"]
 [ext_resource type="Texture2D" uid="uid://bp7lbhfm348r" path="res://Characters/Atlas/textures/image.png" id="2_au12s"]
 
@@ -19,3 +20,22 @@ texture = ExtResource("2_au12s")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_au12s")
+=======
+[ext_resource type="Texture2D" uid="uid://bb72mrn0fip5n" path="res://characters/Atlas/textures/bang.jpg" id="1_2ommj"]
+[ext_resource type="Script" uid="uid://cq5xmo7r00jqt" path="res://characters/Atlas/StandartBullet.cs" id="1_2ugkg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4oes7"]
+size = Vector2(104.75, 62)
+
+[node name="Standart_bullet" type="Area2D"]
+script = ExtResource("1_2ugkg")
+
+[node name="bang" type="Sprite2D" parent="."]
+position = Vector2(-61.50003, -16.000015)
+scale = Vector2(0.20114943, 0.2460318)
+texture = ExtResource("1_2ommj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-61.375, -16)
+shape = SubResource("RectangleShape2D_4oes7")
+>>>>>>> main
