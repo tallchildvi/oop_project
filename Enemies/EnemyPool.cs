@@ -16,21 +16,36 @@ public partial class EnemyPool : Node
 	}
 
 	public override void _Ready()
-	{
-		if (_enemyScene == null || _spawnParent == null)
-		{
-			GD.PrintErr("[EnemyPool] Not initialized! Call Initialize() before adding to scene.");
-			return;
-		}
+{
+	GD.Print($"[EnemyPool] _Ready called. Pool initialized.");
+	// Не створюємо enemies тут!
+}
 
-		for (int i = 0; i < _initialSize; i++)
+	public BaseEnemy GetEnemy()
+	{
+		GD.Print($"[EnemyPool] GetEnemy called. Pool count: {_pool.Count}");
+		
+		BaseEnemy enemy;
+		if (_pool.Count > 0)
 		{
-			var enemy = CreateNewEnemy();
-			if (enemy == null) continue;
-			enemy.Visible = false;
-			enemy.ResetState();
-			_pool.Enqueue(enemy);
+			enemy = _pool.Dequeue();
+			GD.Print("[EnemyPool] Got enemy from pool");
 		}
+		else
+		{
+			enemy = CreateNewEnemy();
+			GD.Print("[EnemyPool] Created new enemy");
+		}
+		
+		if (enemy == null)
+		{
+			GD.PrintErr("[EnemyPool] Enemy is null!");
+			return null;
+		}
+		
+		enemy.Activate(Vector2.Zero);
+		GD.Print($"[EnemyPool] Enemy activated. Visible: {enemy.Visible}, Position: {enemy.Position}");
+		return enemy;
 	}
 
 	private BaseEnemy CreateNewEnemy()
@@ -41,7 +56,6 @@ public partial class EnemyPool : Node
 			GD.PrintErr("[EnemyPool] Instantiate returned null");
 			return null;
 		}
-
 		var enemy = node as BaseEnemy;
 		if (enemy == null)
 		{
@@ -49,28 +63,17 @@ public partial class EnemyPool : Node
 			node.QueueFree();
 			return null;
 		}
-
-		//_spawnParent.CallDeferred(nameof(AddChild), enemy);
-		_spawnParent.CallDeferred("add_child", enemy);
-
+		
+		// Встановлюємо стан ДО додавання в сцену
 		enemy.Visible = false;
-		enemy.ResetState();
+		enemy.ProcessMode = ProcessModeEnum.Disabled;
+		
+		// Використовуємо CallDeferred
+		_spawnParent.CallDeferred("add_child", enemy);
+		
 		return enemy;
 	}
-
-	public BaseEnemy GetEnemy()
-	{
-		BaseEnemy enemy;
-		if (_pool.Count > 0)
-			enemy = _pool.Dequeue();
-		else
-			enemy = CreateNewEnemy();
-
-		if (enemy == null) return null;
-
-		enemy.Activate(Vector2.Zero);
-		return enemy;
-	}
+	
 
 	public void ReturnEnemy(BaseEnemy enemy)
 	{

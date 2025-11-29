@@ -63,6 +63,8 @@ public partial class EnemyManager : Node
 			return;
 		}
 
+		GD.Print($"[EnemyManager] Spawning enemy {_spawnedEnemies + 1}/{_enemiesToSpawn}");
+
 		var enemy = _enemyPool.GetEnemy();
 		if (enemy == null)
 		{
@@ -70,13 +72,17 @@ public partial class EnemyManager : Node
 			return;
 		}
 
-		enemy.Position = GetRandomSpawnPosition();
+		Vector2 spawnPos = GetRandomSpawnPosition();
+		GD.Print($"[EnemyManager] Setting position: {spawnPos}");
+		
+		enemy.Position = spawnPos;
 		enemy.Visible = true;
 		enemy.ResetState();
 		_activeEnemies.Add(enemy);
 		enemy.Died += OnEnemyDied;
 
 		_spawnedEnemies++;
+		GD.Print($"[EnemyManager] Spawned successfully! Active: {_activeEnemies.Count}");
 	}
 
 	//private Vector2 GetRandomSpawnPosition()
