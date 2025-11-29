@@ -86,15 +86,25 @@ public partial class Atlas : BaseCharacter
 
 		// застосовуємо візуал відразу, щоб персонаж одразу дивився в потрібний бік
 		UpdateFacingVisuals();
-
-		bullet.Init(shootDir, facingRight);
-
-		//facingRight = we
+		if (weapon != null)
+		{
+			if (shootDir != Vector2.Zero)
+			{
+				float angle = Mathf.Atan2(shootDir.Y, shootDir.X);
+				float deg = Mathf.RadToDeg(angle);
+				GD.Print(angle);
+				GD.Print(deg);
+				if (!facingRight) deg += 180f;
+				weapon.RotationDegrees = deg;
+			}
+		}
 		
-		//GD.Print($"shoot dir {shootDir}");
-		//GD.Print($"spawn position {spawnPos}");
-		//GD.Print($"enemy globalPosition {enemy.GlobalPosition}");
-		//GD.Print($"{}");
+		GD.Print(shootDir);
+		bullet.Init(shootDir, facingRight);
+		//if (weapon != null)
+		//{
+			//weapon.RotationDegrees = 0f; 
+		//}
 		return true;
 	}
 
@@ -129,16 +139,16 @@ public partial class Atlas : BaseCharacter
 		}
 
 		// Поворот зброї
-		if (weapon != null)
-		{
-			if (dir != Vector2.Zero)
-			{
-				float angle = Mathf.Atan2(dir.Y, dir.X);
-				float deg = Mathf.RadToDeg(angle);
-				if (!facingRight) deg += 180f;
-				weapon.RotationDegrees = deg;
-			}
-		}
+		//if (weapon != null)
+		//{
+			//if (dir != Vector2.Zero)
+			//{
+				//float angle = Mathf.Atan2(dir.Y, dir.X);
+				//float deg = Mathf.RadToDeg(angle);
+				//if (!facingRight) deg += 180f;
+				//weapon.RotationDegrees = deg;
+			//}
+		//}
 	}
 
 
@@ -147,8 +157,26 @@ public partial class Atlas : BaseCharacter
 		characterSprite?.Play("idle");
 		if (weapon != null)
 		{
-			weapon.RotationDegrees = 0;
-			weapon.Scale = facingRight ? new Vector2(Mathf.Abs(originalWeaponScale.X), Mathf.Abs(originalWeaponScale.Y)) 
+			// Нормалізуємо кут до діапазону -180 до 180
+			float targetRotation = Mathf.Wrap(weapon.RotationDegrees, -180f, 180f);
+			
+			// Плавне повернення до 0
+			float rotationSpeed = 5f;
+			if (Mathf.Abs(targetRotation) > 0.1f)
+			{
+				// Визначаємо найкоротший шлях до 0
+				if (targetRotation > 180f) targetRotation -= 360f;
+				if (targetRotation < -180f) targetRotation += 360f;
+				
+				weapon.RotationDegrees = Mathf.MoveToward(targetRotation, 0, rotationSpeed);
+			}
+			else
+			{
+				weapon.RotationDegrees = 0;
+			}
+			
+			weapon.Scale = facingRight 
+				? new Vector2(Mathf.Abs(originalWeaponScale.X), Mathf.Abs(originalWeaponScale.Y)) 
 				: new Vector2(-Mathf.Abs(originalWeaponScale.X), Mathf.Abs(originalWeaponScale.Y));
 		}
 	}

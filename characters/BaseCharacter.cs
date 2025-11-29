@@ -25,6 +25,8 @@ public partial class BaseCharacter : Area2D
 	private bool isCharging = false;
 	private float chargeTimer;
 	private IInput input;
+	protected float autoAttackRange = 600f; 
+
 
 	public override void _Ready()
 	{
@@ -170,7 +172,7 @@ public partial class BaseCharacter : Area2D
 		var enemies = GetTree().GetNodesInGroup("enemy");
 		
 		BaseEnemy closestEnemy = null;
-		float closestDistance = DisplayServer.WindowGetSize().X;
+		float closestDistance = autoAttackRange;
 
 		foreach (Node node in enemies) 
 		{
