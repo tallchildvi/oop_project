@@ -82,9 +82,9 @@ public partial class LevelBuilder : Node, ILevelBuilder
 		}
 
 		// Joystick control
-		_currentLevel.Player.SetInput(new JoystickInput(joystick));
+		//_currentLevel.Player.SetInput(new JoystickInput(joystick));
 		// Keyboard control
-		//_currentLevel.Player.SetInput(new KeyboardInput());
+		_currentLevel.Player.SetInput(new KeyboardInput());
 
 		GD.Print("UI built and joystick connected to player!");
 	}

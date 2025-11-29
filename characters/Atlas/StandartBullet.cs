@@ -8,7 +8,7 @@ public partial class StandartBullet : BulletInheritance
 		base._Ready();
 		selfGroup = "player_bullet";
 		oppositeGroup = "enemy";
-		speed = 2000f;
+		speed = 1000f;
 	}
 
 	public override void Init(Vector2 direction, bool facingRight)

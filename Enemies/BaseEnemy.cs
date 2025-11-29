@@ -16,12 +16,14 @@ public partial class BaseEnemy : Area2D
 	public override void _Ready()
 	{
 		currentHealth = maxHealth;
-		AddToGroup("enemy");
+		//AddToGroup("enemy");
 		
 		Player = GetTree().GetFirstNodeInGroup("player") as BaseCharacter;
 		ProcessMode = ProcessModeEnum.Inherit;
 	}
-	
+	public bool Dead(){
+		return isDead;
+	}
 	public override void _Process(double delta){
 		if (isPaused) return; 
 		if (Player == null) return;
@@ -62,6 +64,7 @@ public partial class BaseEnemy : Area2D
 
 	public virtual void Activate(Vector2 spawnPosition)
 	{
+		AddToGroup("enemy");
 		Position = spawnPosition;
 		Visible = true;
 		isDead = false;

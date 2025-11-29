@@ -132,6 +132,7 @@ public partial class EnemyManager : Node
 	private void OnEnemyDied(BaseEnemy enemy)
 	{
 		if (enemy == null) return;
+		enemy.RemoveFromGroup("enemy");
 
 		// Відписуємось від події
 		enemy.Died -= OnEnemyDied;

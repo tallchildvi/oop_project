@@ -58,31 +58,76 @@ public partial class Atlas : BaseCharacter
 
 		parentForBullets.AddChild(bullet);
 
-		Vector2 spawnPos = (bulletSpawn != null) ? bulletSpawn.GlobalPosition : GlobalPosition;
+		Vector2 spawnPos = bulletSpawn != null ? bulletSpawn.GlobalPosition : GlobalPosition;
 		bullet.GlobalPosition = spawnPos;
+	
+		BaseEnemy enemy = FindClosestEnemy();
+		Vector2 shootDir;
 
-		Vector2 dir = movement != Vector2.Zero ? movement : (facingRight ? Vector2.Right : Vector2.Left);
-		bullet.Init(dir, facingRight);
+		if (enemy != null)
+		{
+			shootDir = (enemy.GlobalPosition - spawnPos).Normalized();
+			// використовуємо реальну різницю X, щоб не залежати від округлень низького X у нормалізованому векторі
+			facingRight = (enemy.GlobalPosition.X - spawnPos.X) >= 0;
+		}
+		else
+		{
+			if (movement != Vector2.Zero)
+			{
+				shootDir = movement.Normalized();
+				facingRight = movement.X >= 0;
+			}
+			else
+			{
+				shootDir = (facingRight ? Vector2.Right : Vector2.Left);
+				// facingRight залишається як є
+			}
+		}
 
+		// застосовуємо візуал відразу, щоб персонаж одразу дивився в потрібний бік
+		UpdateFacingVisuals();
+
+		bullet.Init(shootDir, facingRight);
+
+		//facingRight = we
+		
+		//GD.Print($"shoot dir {shootDir}");
+		//GD.Print($"spawn position {spawnPos}");
+		//GD.Print($"enemy globalPosition {enemy.GlobalPosition}");
+		//GD.Print($"{}");
 		return true;
 	}
+
+	private void UpdateFacingVisuals()
+	{
+		if (characterSprite != null)
+			characterSprite.FlipH = !facingRight;
+
+		if (weapon != null)
+		{
+			// Підтримуємо початковий масштаб за знаком facingRight
+			weapon.Scale = facingRight
+				? new Vector2(Mathf.Abs(originalWeaponScale.X), Mathf.Abs(originalWeaponScale.Y))
+				: new Vector2(-Mathf.Abs(originalWeaponScale.X), Mathf.Abs(originalWeaponScale.Y));
+		}
+	}
+
 
 	protected override void OnMove(Vector2 dir)
 	{
 		characterSprite?.Play("run");
-		
-		if (dir.X < 0 && facingRight)
+
+		// Встановлюємо facingRight відразу за знаком dir.X (якщо рух горизонтальний)
+		if (dir.X != 0)
 		{
-			facingRight = false;
-			if (characterSprite != null) characterSprite.FlipH = true;
-			if (weapon != null) weapon.Scale = new Vector2(-Mathf.Abs(originalWeaponScale.X), Mathf.Abs(originalWeaponScale.Y));
+			bool newFacing = dir.X >= 0;
+			if (newFacing != facingRight)
+			{
+				facingRight = newFacing;
+				UpdateFacingVisuals();
+			}
 		}
-		else if (dir.X > 0 && !facingRight)
-		{
-			facingRight = true;
-			if (characterSprite != null) characterSprite.FlipH = false;
-			if (weapon != null) weapon.Scale = new Vector2(Mathf.Abs(originalWeaponScale.X), Mathf.Abs(originalWeaponScale.Y));
-		}
+
 		// Поворот зброї
 		if (weapon != null)
 		{
@@ -94,8 +139,8 @@ public partial class Atlas : BaseCharacter
 				weapon.RotationDegrees = deg;
 			}
 		}
-
 	}
+
 
 	protected override void OnIdle()
 	{

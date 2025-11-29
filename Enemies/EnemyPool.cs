@@ -74,6 +74,7 @@ public partial class EnemyPool : Node
 
 	public void ReturnEnemy(BaseEnemy enemy)
 	{
+		enemy.RemoveFromGroup("enemy");
 		if (enemy == null || !IsInstanceValid(enemy)) return;
 		enemy.ResetState();
 		enemy.Visible = false;
