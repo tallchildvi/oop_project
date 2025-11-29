@@ -64,7 +64,6 @@ public partial class LevelBuilder : Node, ILevelBuilder
 	
 	public void BuildUI()
 	{
-		// TODO: додати UI побудову
 		var uiScene = GD.Load<PackedScene>("res://level_ui.tscn");
 		if (uiScene == null)
 		{
@@ -75,7 +74,6 @@ public partial class LevelBuilder : Node, ILevelBuilder
 		var ui = uiScene.Instantiate<Node>(); 
 		_currentLevel.AddChild(ui);
 
-		// шукаємо джойстик у сцені UI
 		var joystick = ui.GetNode<JoyStick>("JoyStick"); 
 		if (joystick == null)
 		{
@@ -83,8 +81,10 @@ public partial class LevelBuilder : Node, ILevelBuilder
 			return;
 		}
 
-		// підключаємо інпут гравцю
+		// Joystick control
 		_currentLevel.Player.SetInput(new JoystickInput(joystick));
+		// Keyboard control
+		//_currentLevel.Player.SetInput(new KeyboardInput());
 
 		GD.Print("UI built and joystick connected to player!");
 	}

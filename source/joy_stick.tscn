@@ -9,12 +9,14 @@ script = ExtResource("1_g5623")
 
 [node name="JSBase" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.9019608)
+light_mask = 129
 position = Vector2(193, 467)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_xewsc")
 
 [node name="Stick" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.9019608)
+visibility_layer = 4
 position = Vector2(193, 467.99997)
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("3_hl0po")

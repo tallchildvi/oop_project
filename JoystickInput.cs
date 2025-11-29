@@ -23,7 +23,7 @@ public partial class JoystickInput : IInput
 
 	public bool ToShoot()
 	{
-		return Input.IsKeyPressed(Key.J);
+		return Input.IsActionPressed("shoot");
 		//return Input.IsActionPressed("shoot");
 	}
 }

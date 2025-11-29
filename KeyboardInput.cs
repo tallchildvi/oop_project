@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class KeyboarInput : IInput
+public partial class KeyboardInput : IInput
 {
 	public Vector2 GetMovement()
 	{
