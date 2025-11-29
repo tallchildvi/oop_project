@@ -115,6 +115,7 @@ public partial class BaseCharacter : Area2D
 		inDash = true;
 		dashDirection = direction.Normalized();
 		dashTimer = dashTime;
+		
 		movement = Vector2.Zero;
 		OnDashStart();
 	}
