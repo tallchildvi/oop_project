@@ -65,7 +65,7 @@ public partial class BaseCharacter : Area2D
 			if (input.ToShoot())
 				TryShoot();
 		}
-
+		GD.Print(FindClosestEnemy().GlobalPosition);
 		if (dashReloadTimer > 0f) dashReloadTimer = Math.Max(0f, dashReloadTimer - (float)delta);
 		if (bulletReloadTimer > 0f) bulletReloadTimer = Math.Max(0f, bulletReloadTimer - (float)delta);
 		if (chargeTimer > 0f) chargeTimer = Math.Max(0f, chargeTimer - (float)delta);
@@ -164,6 +164,31 @@ public partial class BaseCharacter : Area2D
 	protected virtual void OnDashStart() { }
 	protected virtual void OnDashEnd() { }
 	protected virtual void OnShoot() { }
+
+	private Alien FindClosestEnemy()
+	{
+		var enemies = GetTree().GetNodesInGroup("enemy");
+		
+		Alien closestEnemy = null;
+		float closestDistance = DisplayServer.WindowGetSize().X / 2.0f;
+
+		foreach (Node node in enemies) 
+		{
+			Alien enemy = node as Alien; 
+			if (enemy == null)
+				continue;
+
+			float dist = GlobalPosition.DistanceTo(enemy.GlobalPosition);
+			if (dist < closestDistance)
+			{
+				closestDistance = dist;
+				closestEnemy = enemy;
+			}
+		}
+
+		return closestEnemy;
+	}
+
 
 	public virtual void TakeDamage(int damage)
 	{

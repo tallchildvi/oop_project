@@ -5,7 +5,7 @@ public partial class Alien : BaseEnemy
 {
 	private float bulletSpawnInterval = 3.0f;
 	private PackedScene bulletScene;
-	private float activationDistance = 400f;
+	private float activationDistance = 600f;
 
 	private AnimatedSprite2D characterSprite;
 	private Timer _bulletTimer;
