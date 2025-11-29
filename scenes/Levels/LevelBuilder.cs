@@ -61,10 +61,32 @@ public partial class LevelBuilder : Node, ILevelBuilder
 		_currentLevel.EnemyManager = enemyManager;
 		_currentLevel.EnemyManager.Clear();
 	}
-
+	
 	public void BuildUI()
 	{
 		// TODO: додати UI побудову
+		var uiScene = GD.Load<PackedScene>("res://level_ui.tscn");
+		if (uiScene == null)
+		{
+			GD.Print("ui scene is null");
+			return;
+		}
+
+		var ui = uiScene.Instantiate<Node>(); 
+		_currentLevel.AddChild(ui);
+
+		// шукаємо джойстик у сцені UI
+		var joystick = ui.GetNode<JoyStick>("JoyStick"); 
+		if (joystick == null)
+		{
+			GD.Print("JoyStick not found in UI!");
+			return;
+		}
+
+		// підключаємо інпут гравцю
+		_currentLevel.Player.SetInput(new JoystickInput(joystick));
+
+		GD.Print("UI built and joystick connected to player!");
 	}
 
 	public Level GetResult()

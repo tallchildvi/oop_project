@@ -24,6 +24,7 @@ public partial class BaseCharacter : Area2D
 	protected float chargeTime; 
 	private bool isCharging = false;
 	private float chargeTimer;
+	private IInput input;
 
 	public override void _Ready()
 	{
@@ -37,7 +38,7 @@ public partial class BaseCharacter : Area2D
 
 	public void Init(float set_speed = 200f, float set_dashSpeed = 400f, float set_dashTime = 0.2f, 
 		float set_dashReloadTime = 1f, float set_bulletReloadTime = 0.4f, int set_maxAmmo = 10, float set_chargeTime = 3f)
-	{
+	{	
 		GD.Print("try to init character");
 		speed = set_speed;
 		dashSpeed = set_dashSpeed;
@@ -48,16 +49,26 @@ public partial class BaseCharacter : Area2D
 		ammo = set_maxAmmo;
 		chargeTime = set_chargeTime;
 	}
-
+	public void SetInput(IInput newInput)
+	{
+		input = newInput;
+	}
 	public override void _Process(double delta)
 	{
 		if (!control) return;
 
+		if (input != null)
+		{
+			movement = input.GetMovement();
+			if (input.ToDash() && dashReloadTimer <= 0f && movement != Vector2.Zero && !inDash)
+				StartDash(movement);
+			if (input.ToShoot())
+				TryShoot();
+		}
+
 		if (dashReloadTimer > 0f) dashReloadTimer = Math.Max(0f, dashReloadTimer - (float)delta);
 		if (bulletReloadTimer > 0f) bulletReloadTimer = Math.Max(0f, bulletReloadTimer - (float)delta);
 		if (chargeTimer > 0f) chargeTimer = Math.Max(0f, chargeTimer - (float)delta);
-		
-		ReadInput();
 		if (isCharging && chargeTimer <= 0f)
 		{
 			isCharging = false;
@@ -93,21 +104,6 @@ public partial class BaseCharacter : Area2D
 				OnIdle();
 			}
 		}
-	}
-
-	protected virtual void ReadInput()
-	{
-		movement = Vector2.Zero;
-		if (Input.IsKeyPressed(Key.W)) movement.Y -= 1;
-		if (Input.IsKeyPressed(Key.S)) movement.Y += 1;
-		if (Input.IsKeyPressed(Key.A)) movement.X -= 1;
-		if (Input.IsKeyPressed(Key.D)) movement.X += 1;
-
-		if (Input.IsKeyPressed(Key.Shift) && dashReloadTimer <= 0f && movement != Vector2.Zero && !inDash)
-			StartDash(movement);
-
-		if (Input.IsKeyPressed(Key.J))
-			TryShoot();
 	}
 
 	protected virtual void StartDash(Vector2 direction)

@@ -23,5 +23,3 @@ public partial class KeyboarInput : IInput
 		return Input.IsKeyPressed(Key.J);
 	}
 }
-
-}

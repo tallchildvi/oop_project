@@ -17,11 +17,13 @@ public partial class JoystickInput : IInput
 
 	public bool ToDash()
 	{
+		return Input.IsKeyPressed(Key.Shift);
 		//return Input.IsActionPressed("dash"); 
 	}
 
-	public bool WantsToShoot()
+	public bool ToShoot()
 	{
+		return Input.IsKeyPressed(Key.J);
 		//return Input.IsActionPressed("shoot");
 	}
 }
