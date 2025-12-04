@@ -7,17 +7,17 @@ public partial class HealthBar : TextureProgressBar
 	{
 		MinValue = 0;
 		EventManager.Subscribe("PLAYER_HEALTH_CHANGED", OnHealthChanged);
-		GD.Print("[HealthBar] Subscribed to PLAYER_HEALTH_CHANGED");
 		
+		GD.Print("[HealthBar] Subscribed to PLAYER_HEALTH_CHANGED");
 	}
 
 	private void OnHealthChanged(object data)
 	{
-		GD.Print("event worked --------------------------------------------------------------------");
 		if (data is HealthData healthData)
 		{
 			MaxValue = healthData.MaxHealth;
 			Value = Mathf.Clamp(healthData.CurrentHealth, MinValue, MaxValue);
+			
 			GD.Print($"[HealthBar] Updated: {Value}/{MaxValue}");
 		}
 		else

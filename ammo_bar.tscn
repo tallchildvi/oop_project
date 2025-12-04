@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://b0ad71scjtxed"]
+
+[ext_resource type="Texture2D" uid="uid://r2jo72pvctdu" path="res://Source/healthbarUnder.png" id="1_drula"]
+[ext_resource type="Texture2D" uid="uid://o6e7njijpdja" path="res://Source/ammobarProgress.png" id="2_xkf84"]
+[ext_resource type="Script" uid="uid://daeuyeeopocbe" path="res://AmmoBar.cs" id="3_xkf84"]
+
+[node name="AmmoBar" type="TextureProgressBar"]
+offset_left = 90.0
+offset_top = 101.0
+offset_right = 318.0
+offset_bottom = 140.0
+nine_patch_stretch = true
+texture_under = ExtResource("1_drula")
+texture_progress = ExtResource("2_xkf84")
+script = ExtResource("3_xkf84")

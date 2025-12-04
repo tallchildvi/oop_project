@@ -42,6 +42,12 @@ public partial class BaseCharacter : Area2D
 			CurrentHealth = health,
 			MaxHealth = maxHealth
 		});
+		
+		EventManager.TriggerEvent("PLAYER_AMMO_CHANGED", new AmmoData
+		{
+			CurrentAmmo = ammo,
+			MaxAmmo = maxAmmo
+		});
 	}
 
 	public void Init(float set_speed = 200f, float set_dashSpeed = 400f, float set_dashTime = 0.2f, 
@@ -159,12 +165,22 @@ public partial class BaseCharacter : Area2D
 	public void SetAmmo(int value)
 	{
 		ammo = Mathf.Clamp(value, 0, maxAmmo);
+		EventManager.TriggerEvent("PLAYER_AMMO_CHANGED", new AmmoData
+		{
+			CurrentAmmo = ammo,
+			MaxAmmo = maxAmmo
+		});
 	}
 
 	protected void ConsumeAmmo(int amount)
 	{
 		ammo = Mathf.Clamp(ammo - amount, 0, maxAmmo);
 		GD.Print($"[BaseCharacter] ammo: {ammo}");
+		EventManager.TriggerEvent("PLAYER_AMMO_CHANGED", new AmmoData
+		{
+			CurrentAmmo = ammo,
+			MaxAmmo = maxAmmo
+		});
 	}
 
 	protected virtual void OnMove(Vector2 dir) { }
@@ -225,4 +241,9 @@ public class HealthData
 {
 	public float CurrentHealth { get; set; }
 	public float MaxHealth { get; set; }
+}
+public class AmmoData
+{
+	public float CurrentAmmo { get; set; }
+	public float MaxAmmo { get; set; }
 }

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dosdat32olhlk"]
+[gd_scene load_steps=6 format=3 uid="uid://dosdat32olhlk"]
 
 [ext_resource type="Script" uid="uid://40g2gw8qc515" path="res://LevelUI.cs" id="1_awnb2"]
 [ext_resource type="PackedScene" uid="uid://bhau5jykqkj48" path="res://Source/joy_stick.tscn" id="1_ktgpk"]
 [ext_resource type="PackedScene" uid="uid://0tr0bs1nquea" path="res://attack_button.tscn" id="3_41gx8"]
 [ext_resource type="PackedScene" uid="uid://by2464qgv4v5m" path="res://health.tscn" id="4_eu2e1"]
+[ext_resource type="PackedScene" uid="uid://b0ad71scjtxed" path="res://ammo_bar.tscn" id="5_1aqf8"]
 
 [node name="LevelUI" type="CanvasLayer"]
 layer = 3
@@ -14,3 +15,9 @@ script = ExtResource("1_awnb2")
 [node name="AttackButton" parent="." instance=ExtResource("3_41gx8")]
 
 [node name="health" parent="." instance=ExtResource("4_eu2e1")]
+
+[node name="ammo" parent="." instance=ExtResource("5_1aqf8")]
+offset_left = 106.0
+offset_top = 58.0
+offset_right = 244.0
+offset_bottom = 78.0

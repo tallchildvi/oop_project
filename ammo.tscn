@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://bnku2wqmqja0x"]
+
+[ext_resource type="Texture2D" uid="uid://d2ogarg0n6n8n" path="res://Source/healthbarUnder.png" id="1_cuwaw"]
+[ext_resource type="Texture2D" uid="uid://8tl5pfkhec0k" path="res://Source/ammoProgress.png" id="2_ssegj"]
+[ext_resource type="Script" uid="uid://dd80bdjiikxtg" path="res://AmmoBar.cs" id="3_vu2pk"]
+
+[node name="ammo" type="TextureProgressBar"]
+texture_under = ExtResource("1_cuwaw")
+texture_progress = ExtResource("2_ssegj")
+script = ExtResource("3_vu2pk")
