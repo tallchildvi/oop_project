@@ -36,6 +36,12 @@ public partial class BaseCharacter : Area2D
 
 		health = maxHealth;
 		ammo = maxAmmo;
+		
+		EventManager.TriggerEvent("PLAYER_HEALTH_CHANGED", new HealthData
+		{
+			CurrentHealth = health,
+			MaxHealth = maxHealth
+		});
 	}
 
 	public void Init(float set_speed = 200f, float set_dashSpeed = 400f, float set_dashTime = 0.2f, 
@@ -195,6 +201,11 @@ public partial class BaseCharacter : Area2D
 	public virtual void TakeDamage(int damage)
 	{
 		health -= damage;
+		EventManager.TriggerEvent("PLAYER_HEALTH_CHANGED", new HealthData
+		{
+			CurrentHealth = health,
+			MaxHealth = maxHealth
+		});
 		if (health > 0)
 			GD.Print("[BaseCharacter] take damage");
 		else
@@ -203,8 +214,15 @@ public partial class BaseCharacter : Area2D
 			GD.Print("[BaseCharacter] Died");
 			EventManager.TriggerEvent("GAME_OVER", this);
 		}
+		
 	}
 
 	public void EnableControl() => control = true;
 	public void DisableControl() => control = false;
+}
+
+public class HealthData
+{
+	public float CurrentHealth { get; set; }
+	public float MaxHealth { get; set; }
 }

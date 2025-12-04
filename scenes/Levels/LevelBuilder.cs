@@ -70,16 +70,18 @@ public partial class LevelBuilder : Node, ILevelBuilder
 			GD.Print("ui scene is null");
 			return;
 		}
-
-		var ui = uiScene.Instantiate<Node>(); 
-		_currentLevel.AddChild(ui);
-
-		var joystick = ui.GetNode<JoyStick>("JoyStick"); 
+		
+		var ui = uiScene.Instantiate<Node>();
+		_currentLevel.CallDeferred("AddChild", ui);
+		
+		var joystick = ui.GetNodeOrNull<JoyStick>("JoyStick"); 
 		if (joystick == null)
 		{
 			GD.Print("JoyStick not found in UI!");
-			return;
 		}
+		
+		_currentLevel.Player.SetInput(new KeyboardInput());
+		GD.Print("UI built!");
 
 		// Joystick control
 		//_currentLevel.Player.SetInput(new JoystickInput(joystick));

@@ -44,4 +44,5 @@ public partial class GameManager : Node
 		_builder.QueueFree();
 		_builder = null;
 	}
+
 }
