@@ -1,12 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://6tqy1yxl18iv"]
+[gd_scene load_steps=4 format=3 uid="uid://6tqy1yxl18iv"]
 
 [ext_resource type="Script" uid="uid://cq5xmo7r00jqt" path="res://characters/Atlas/StandartBullet.cs" id="1_2ugkg"]
 [ext_resource type="Texture2D" uid="uid://54cmuo83tni5" path="res://characters/textures/photo_2025-10-10_01-36-47-removebg-preview.png" id="2_4oes7"]
 
-[node name="Standart_bullet" type="Sprite2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4oes7"]
+size = Vector2(104.75, 66)
+
+[node name="Standart_bullet" type="Area2D"]
 script = ExtResource("1_2ugkg")
 
-[node name="Photo20251010013647RemovebgPreview" type="Sprite2D" parent="."]
-position = Vector2(-7, -7)
-scale = Vector2(0.206, 0.178)
+[node name="bang" type="Sprite2D" parent="."]
+position = Vector2(-8.000004, -2)
+scale = Vector2(0.20114943, 0.2460318)
 texture = ExtResource("2_4oes7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_4oes7")
