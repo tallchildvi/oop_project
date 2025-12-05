@@ -27,9 +27,4 @@ This game is designed for touch input. All controls are displayed directly on th
 This project was built by the following contributors:
 
 * [https://github.com/tallchildvi]
-* [https://github.com/ovaleriankaa]
 * [https://github.com/DavydenkoV07]
-* [https://github.com/VladyslavYan0v]
-* [https://github.com/RostyslavBoichuk]
-
-  
