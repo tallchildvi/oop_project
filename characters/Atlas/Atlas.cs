@@ -1,15 +1,45 @@
+/// <file>
+/// <summary>
+/// Atlas.cs - Player character implementation with weapon aiming and animation
+/// </summary>
+/// </file>
+
 using Godot;
 using System;
 
+/// <summary>
+/// Atlas character class that extends BaseCharacter with specific animations and shooting mechanics.
+/// </summary>
+/// <remarks>
+/// Implements auto-aiming towards enemies, weapon rotation, and character sprite flipping.
+/// Handles all visual aspects of the Atlas character including movement animations and dash effects.
+/// </remarks>
 public partial class Atlas : BaseCharacter
 {
+	/// <summary>Animated sprite for the character body.</summary>
 	private AnimatedSprite2D characterSprite;
+	
+	/// <summary>Animated sprite for the weapon.</summary>
 	private AnimatedSprite2D weapon;
+	
+	/// <summary>Marker indicating bullet spawn position.</summary>
 	private Marker2D bulletSpawn;
+	
+	/// <summary>Original scale of the weapon sprite for proper flipping.</summary>
 	private Vector2 originalWeaponScale = Vector2.One;
+	
+	/// <summary>Original scale of the character sprite for proper flipping.</summary>
 	private Vector2 originalCharacterScale = Vector2.One;
 	
 
+	/// <summary>
+	/// Initializes the Atlas character and sets up sprite references.
+	/// </summary>
+	/// <remarks>
+	/// Configures Atlas-specific parameters: speed=250, dashSpeed=500, dashTime=1.5s, 
+	/// dashReload=1.2s, bulletReload=0.15s, maxAmmo=12, chargeTime=2s.
+	/// Also retrieves and validates all sprite nodes and scales them appropriately.
+	/// </remarks>
 	public override void _Ready()
 	{
 		base._Ready();
@@ -31,6 +61,15 @@ public partial class Atlas : BaseCharacter
 		characterSprite?.Play("idle");
 	}
 
+	/// <summary>
+	/// Executes the shooting logic with auto-aiming towards nearest enemy.
+	/// </summary>
+	/// <returns>True if bullet was successfully spawned; otherwise false.</returns>
+	/// <remarks>
+	/// Creates a bullet instance, determines shoot direction (prioritizes closest enemy, 
+	/// then movement direction, then facing direction), updates weapon rotation, 
+	/// and spawns the bullet at the weapon's bullet spawn marker.
+	/// </remarks>
 	protected override bool Shoot()
 	{
 		if (bulletBase == null)
@@ -108,6 +147,13 @@ public partial class Atlas : BaseCharacter
 		return true;
 	}
 
+	/// <summary>
+	/// Updates character and weapon sprites based on facing direction.
+	/// </summary>
+	/// <remarks>
+	/// Flips the character sprite horizontally and adjusts weapon scale 
+	/// to maintain proper visual orientation.
+	/// </remarks>
 	private void UpdateFacingVisuals()
 	{
 		if (characterSprite != null)
@@ -123,6 +169,13 @@ public partial class Atlas : BaseCharacter
 	}
 
 
+	/// <summary>
+	/// Called when the character is moving. Updates animation and facing direction.
+	/// </summary>
+	/// <param name="dir">Movement direction vector.</param>
+	/// <remarks>
+	/// Plays the "run" animation and updates facing direction based on horizontal movement.
+	/// </remarks>
 	protected override void OnMove(Vector2 dir)
 	{
 		characterSprite?.Play("run");
@@ -152,6 +205,13 @@ public partial class Atlas : BaseCharacter
 	}
 
 
+	/// <summary>
+	/// Called when the character is idle. Resets animation and weapon rotation.
+	/// </summary>
+	/// <remarks>
+	/// Plays the "idle" animation and smoothly rotates the weapon back to 0 degrees.
+	/// Maintains proper weapon scale based on facing direction.
+	/// </remarks>
 	protected override void OnIdle()
 	{
 		characterSprite?.Play("idle");
@@ -181,11 +241,17 @@ public partial class Atlas : BaseCharacter
 		}
 	}
 
+	/// <summary>
+	/// Called when dash starts. Plays dash animation.
+	/// </summary>
 	protected override void OnDashStart()
 	{
 		characterSprite?.Play("dash");
 	}
 
+	/// <summary>
+	/// Called when dash ends. Returns to idle animation.
+	/// </summary>
 	protected override void OnDashEnd()
 	{
 		characterSprite?.Play("idle");
