@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b44rgee4a672s"
-path="res://.godot/imported/LargeHandleFilledGrey.png-5a5b1f29ab049d633c747c0a1c87b1a5.ctex"
+path="res://.godot/imported/LargeHandleFilledGrey.png-360fd296df19f3ec7df4cc58cfc9ed2c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Source/LargeHandleFilledGrey.png"
-dest_files=["res://.godot/imported/LargeHandleFilledGrey.png-5a5b1f29ab049d633c747c0a1c87b1a5.ctex"]
+source_file="res://source/LargeHandleFilledGrey.png"
+dest_files=["res://.godot/imported/LargeHandleFilledGrey.png-360fd296df19f3ec7df4cc58cfc9ed2c.ctex"]
 
 [params]
 

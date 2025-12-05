@@ -2105,7 +2105,7 @@ LATEX_OUTPUT           = latex
 #
 # Note that when not enabling USE_PDFLATEX the default is latex when enabling
 # USE_PDFLATEX the default is pdflatex and when in the later case latex is
-# chosen this is overwritten by pdflatex. For specific output languages the
+# chosen this is overwritten by pdflatex. For specific output langua ges the
 # default can have been set differently, this depends on the implementation of
 # the output language.
 # This tag requires that the tag GENERATE_LATEX is set to YES.
