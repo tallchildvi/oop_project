@@ -9,9 +9,9 @@ Language: C#
 
 Platforms: Mobile.
 ### Screenshots
-![Main menu screenshot](docs/Screenshots/Screenshot 2025-12-05 192620.png)
+<img width="1143" height="650" alt="Screenshot 2025-12-05 192620" src="https://github.com/user-attachments/assets/54758b1f-7155-48b8-9d8f-8b33960497db" />
+<img width="1140" height="645" alt="Screenshot 2025-12-05 192635" src="https://github.com/user-attachments/assets/1426b4f1-3ce5-4917-a9d9-41a5b03dc2c7" />
 
-![Game screenshot](docs/Screenshots/Screenshot 2025-12-05 192635.png)
 
 ### 🎮 Controls (Mobile)
 
