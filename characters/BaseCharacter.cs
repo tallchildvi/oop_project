@@ -1,33 +1,97 @@
+/// <file>
+/// <summary>
+/// BaseCharacter.cs - Base class for all game characters with movement, combat, and health management
+/// </summary>
+/// </file>
+
 using Godot;
 using System;
 
+/// <summary>
+/// Base class for all game characters. Provides movement, shooting, dashing, and health management functionality.
+/// </summary>
+/// <remarks>
+/// This class serves as an abstract base for all game characters, including the player and enemies.
+/// Inherits from Area2D for collision handling.
+/// </remarks>
 public partial class BaseCharacter : Area2D
 {
+	/// <summary>Normal movement speed of the character.</summary>
 	public float speed;
+	
+	/// <summary>Movement speed during dash execution.</summary>
 	protected float dashSpeed;
+	
+	/// <summary>Duration of the dash in seconds.</summary>
 	protected float dashTime;
+	
+	/// <summary>Cooldown time before the next dash can be performed.</summary>
 	protected float dashReloadTime;
+	
+	/// <summary>Cooldown time between shots.</summary>
 	protected float bulletReloadTime;
+	
+	/// <summary>Maximum health of the character.</summary>
 	protected int maxHealth = 5;
+	
+	/// <summary>Maximum ammunition capacity.</summary>
 	protected int maxAmmo = 10;
+	
+	/// <summary>Current ammunition count.</summary>
 	protected int ammo = 0;
+	
+	/// <summary>Scene template for creating bullets.</summary>
 	protected PackedScene bulletBase; 
+	
+	/// <summary>Movement direction vector of the character.</summary>
 	protected Vector2 movement = Vector2.Zero;
+	
+	/// <summary>Dash direction vector.</summary>
 	protected Vector2 dashDirection = Vector2.Zero;
+	
+	/// <summary>Flag indicating if dash is currently active.</summary>
 	protected bool inDash = false;
+	
+	/// <summary>Timer for current dash duration.</summary>
 	protected float dashTimer = 0f;
+	
+	/// <summary>Timer for dash cooldown.</summary>
 	protected float dashReloadTimer = 0f;
+	
+	/// <summary>Timer for weapon reload cooldown.</summary>
 	protected float bulletReloadTimer = 0f;
+	
+	/// <summary>Flag for character facing direction (true = right).</summary>
 	protected bool facingRight = true;
+	
+	/// <summary>Current health amount.</summary>
 	protected int health;
+	
+	/// <summary>Flag for character control (true = controllable).</summary>
 	protected bool control = true;
+	
+	/// <summary>Time required for full weapon charge.</summary>
 	protected float chargeTime; 
+	
+	/// <summary>Flag indicating if charging is in progress.</summary>
 	private bool isCharging = false;
+	
+	/// <summary>Timer for weapon charging process.</summary>
 	private float chargeTimer;
+	
+	/// <summary>Interface for receiving input from player or AI.</summary>
 	private IInput input;
+	
+	/// <summary>Maximum distance for automatic targeting.</summary>
 	protected float autoAttackRange = 600f; 
 
 
+	/// <summary>
+	/// Called when the node enters the scene tree.
+	/// </summary>
+	/// <remarks>
+	/// Initializes health, ammunition, loads bullet template, and triggers UI update events.
+	/// </remarks>
 	public override void _Ready()
 	{
 		AddToGroup("player");
@@ -50,6 +114,16 @@ public partial class BaseCharacter : Area2D
 		});
 	}
 
+	/// <summary>
+	/// Initializes character parameters.
+	/// </summary>
+	/// <param name="set_speed">Movement speed (default 200).</param>
+	/// <param name="set_dashSpeed">Dash speed (default 400).</param>
+	/// <param name="set_dashTime">Dash duration (default 0.2 sec).</param>
+	/// <param name="set_dashReloadTime">Dash cooldown time (default 1 sec).</param>
+	/// <param name="set_bulletReloadTime">Weapon reload time (default 0.4 sec).</param>
+	/// <param name="set_maxAmmo">Maximum ammunition capacity (default 10).</param>
+	/// <param name="set_chargeTime">Weapon charge time (default 3 sec).</param>
 	public void Init(float set_speed = 200f, float set_dashSpeed = 400f, float set_dashTime = 0.2f, 
 		float set_dashReloadTime = 1f, float set_bulletReloadTime = 0.4f, int set_maxAmmo = 10, float set_chargeTime = 3f)
 	{	
@@ -63,10 +137,23 @@ public partial class BaseCharacter : Area2D
 		ammo = set_maxAmmo;
 		chargeTime = set_chargeTime;
 	}
+	
+	/// <summary>
+	/// Sets the input source for the character.
+	/// </summary>
+	/// <param name="newInput">Object implementing the IInput interface.</param>
 	public void SetInput(IInput newInput)
 	{
 		input = newInput;
 	}
+	
+	/// <summary>
+	/// Called every frame to process character logic.
+	/// </summary>
+	/// <param name="delta">Time elapsed since the previous frame in seconds.</param>
+	/// <remarks>
+	/// Handles input, movement, dashing, shooting, and updates timers.
+	/// </remarks>
 	public override void _Process(double delta)
 	{
 		if (!control) return;
@@ -120,6 +207,13 @@ public partial class BaseCharacter : Area2D
 		}
 	}
 
+	/// <summary>
+	/// Initiates a dash in the specified direction.
+	/// </summary>
+	/// <param name="direction">Dash direction vector.</param>
+	/// <remarks>
+	/// Can be overridden in derived classes for additional logic.
+	/// </remarks>
 	protected virtual void StartDash(Vector2 direction)
 	{
 		inDash = true;
@@ -130,6 +224,13 @@ public partial class BaseCharacter : Area2D
 		OnDashStart();
 	}
 
+	/// <summary>
+	/// Attempts to perform a shot.
+	/// </summary>
+	/// <remarks>
+	/// Checks reload timer and ammunition availability. 
+	/// If ammunition is depleted, initiates charging.
+	/// </remarks>
 	protected virtual void TryShoot()
 	{
 		if (bulletReloadTimer > 0f) return;
@@ -148,20 +249,47 @@ public partial class BaseCharacter : Area2D
 		}
 	}
 
+	/// <summary>
+	/// Executes shooting logic. Must be overridden in derived classes.
+	/// </summary>
+	/// <returns>True if shot is successful; otherwise false.</returns>
 	protected virtual bool Shoot()
 	{
 		return false;
 	}
 
+	/// <summary>
+	/// Returns the current ammunition count.
+	/// </summary>
+	/// <returns>Ammunition count.</returns>
 	public int GetAmmo() => ammo;
+	
+	/// <summary>
+	/// Returns the maximum ammunition capacity.
+	/// </summary>
+	/// <returns>Maximum ammunition capacity.</returns>
 	public int GetMaxAmmo() => maxAmmo;
 
+	/// <summary>
+	/// Initiates the weapon charging process.
+	/// </summary>
+	/// <remarks>
+	/// After charging completes, ammunition will be fully restored.
+	/// </remarks>
 	public void StartCharge()
 	{
 		isCharging = true;
 		chargeTimer = chargeTime;
 	}
 
+	/// <summary>
+	/// Sets the ammunition count.
+	/// </summary>
+	/// <param name="value">New ammunition count.</param>
+	/// <remarks>
+	/// Value is automatically clamped to the range [0, maxAmmo].
+	/// Triggers UI update event.
+	/// </remarks>
 	public void SetAmmo(int value)
 	{
 		ammo = Mathf.Clamp(value, 0, maxAmmo);
@@ -172,6 +300,14 @@ public partial class BaseCharacter : Area2D
 		});
 	}
 
+	/// <summary>
+	/// Consumes the specified amount of ammunition.
+	/// </summary>
+	/// <param name="amount">Amount of ammunition to consume.</param>
+	/// <remarks>
+	/// Ammunition count cannot become negative.
+	/// Triggers UI update event.
+	/// </remarks>
 	protected void ConsumeAmmo(int amount)
 	{
 		ammo = Mathf.Clamp(ammo - amount, 0, maxAmmo);
@@ -183,12 +319,40 @@ public partial class BaseCharacter : Area2D
 		});
 	}
 
+	/// <summary>
+	/// Called when the character is moving. Can be overridden.
+	/// </summary>
+	/// <param name="dir">Movement direction.</param>
 	protected virtual void OnMove(Vector2 dir) { }
+	
+	/// <summary>
+	/// Called when the character is idle. Can be overridden.
+	/// </summary>
 	protected virtual void OnIdle() { }
+	
+	/// <summary>
+	/// Called at the start of a dash. Can be overridden.
+	/// </summary>
 	protected virtual void OnDashStart() { }
+	
+	/// <summary>
+	/// Called at the end of a dash. Can be overridden.
+	/// </summary>
 	protected virtual void OnDashEnd() { }
+	
+	/// <summary>
+	/// Called after shooting. Can be overridden.
+	/// </summary>
 	protected virtual void OnShoot() { }
 
+	/// <summary>
+	/// Finds the closest living enemy within auto-attack range.
+	/// </summary>
+	/// <returns>The closest enemy, or null if no enemies found.</returns>
+	/// <remarks>
+	/// Searches all nodes in the "enemy" group and calculates distances from the character.
+	/// Ignores dead enemies.
+	/// </remarks>
 	protected BaseEnemy FindClosestEnemy()
 	{
 		var enemies = GetTree().GetNodesInGroup("enemy");
@@ -214,6 +378,14 @@ public partial class BaseCharacter : Area2D
 	}
 
 
+	/// <summary>
+	/// Applies damage to the character.
+	/// </summary>
+	/// <param name="damage">Amount of damage to apply.</param>
+	/// <remarks>
+	/// Reduces health and triggers health update event.
+	/// If health reaches zero, triggers game over event.
+	/// </remarks>
 	public virtual void TakeDamage(int damage)
 	{
 		health -= damage;
@@ -233,17 +405,43 @@ public partial class BaseCharacter : Area2D
 		
 	}
 
+	/// <summary>
+	/// Enables character control.
+	/// </summary>
 	public void EnableControl() => control = true;
+	
+	/// <summary>
+	/// Disables character control.
+	/// </summary>
 	public void DisableControl() => control = false;
 }
 
+/// <summary>
+/// Data structure for health information.
+/// </summary>
+/// <remarks>
+/// Used for passing health data through event system.
+/// </remarks>
 public class HealthData
 {
+	/// <summary>Current health value.</summary>
 	public float CurrentHealth { get; set; }
+	
+	/// <summary>Maximum health value.</summary>
 	public float MaxHealth { get; set; }
 }
+
+/// <summary>
+/// Data structure for ammunition information.
+/// </summary>
+/// <remarks>
+/// Used for passing ammunition data through event system.
+/// </remarks>
 public class AmmoData
 {
+	/// <summary>Current ammunition count.</summary>
 	public float CurrentAmmo { get; set; }
+	
+	/// <summary>Maximum ammunition capacity.</summary>
 	public float MaxAmmo { get; set; }
 }
